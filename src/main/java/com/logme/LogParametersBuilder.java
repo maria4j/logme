@@ -72,6 +72,7 @@ class LogParametersBuilder implements LogParameters {
         return this;
     }
 
+    @Override
     public boolean isEmpty() {
         return stringBuilder.length() == 0;
     }

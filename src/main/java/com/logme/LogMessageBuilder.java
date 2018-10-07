@@ -1,6 +1,7 @@
 package com.logme;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 class LogMessageBuilder implements LogMessage {
@@ -9,7 +10,7 @@ class LogMessageBuilder implements LogMessage {
     private final StringBuilder textBuilder;
     private final List<LogMessage> appendedMessages = new ArrayList<>();
 
-    private LogParameters parameters = null;
+    private final LogParameters parameters = new LogParametersBuilder();
 
     LogMessageBuilder(String text) {
         this.textBuilder = new StringBuilder(text);
@@ -34,8 +35,20 @@ class LogMessageBuilder implements LogMessage {
     }
 
     @Override
-    public LogMessageBuilder setParameters(LogParameters parameters) {
-        this.parameters = parameters;
+    public LogMessage appendParameter(String name, String value) {
+        parameters.append(name, value);
+        return this;
+    }
+
+    @Override
+    public LogMessage appendParameter(String name, String[] values) {
+        parameters.append(name, values);
+        return this;
+    }
+
+    @Override
+    public LogMessage appendParameter(String name, Collection<LogParameters> values) {
+        parameters.append(name, values);
         return this;
     }
 
@@ -49,7 +62,7 @@ class LogMessageBuilder implements LogMessage {
 
         stringBuilder.append(textBuilder);
 
-        if (parameters != null && !parameters.isEmpty()) {
+        if (!parameters.isEmpty()) {
             stringBuilder.append(" ").append(parameters);
         }
 
