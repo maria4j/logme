@@ -15,4 +15,9 @@ public class Logme {
     public static LogParameters createParameters() {
         return new LogParametersBuilder();
     }
+
+    public static LogParameters createParameters(boolean multiline, int numberOfIndents) {
+        return new LogParametersBuilder(multiline, numberOfIndents);
+    }
+
 }

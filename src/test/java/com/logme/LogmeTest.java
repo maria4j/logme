@@ -85,11 +85,9 @@ class LogmeTest {
                                 .append("path", "C:/doc/1.pdf"))
                 ).toString();
 
-        // TODO: эскейпинг '=' в названиях и значениях
         Assertions.assertEquals("Something happened {id=36f6f78hje, files=[{type=pdf, path=C:/doc/1.pdf}]}", actualMessage);
     }
 
-    // TODO: Некоторые сообщения хотят форматировать на несколько строк
     @Test
     void createMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithTwoItems_appended() {
         String actualMessage = Logme.createMessage("Something happened")
@@ -105,4 +103,35 @@ class LogmeTest {
         
         Assertions.assertEquals("Something happened {id=36f6f78hje, files=[{type=pdf, path=C:/doc/1.pdf}, {type=txt, path=C:/doc/2.txt}]}", actualMessage);
     }
+
+    @Test
+    void createMessage_multiline_formatted() {
+        String actualMessage = Logme.createParameters(true, 1)
+                .append("type", "pdf")
+                .append("path", "C:/doc/1.pdf")
+                .append("files",
+                        Arrays.asList(
+                            Logme.createParameters(true, 2)
+                                .append("type", "pdf")
+                                .append("path", "C:/doc/1.pdf"),
+                            Logme.createParameters(true, 2)
+                                .append("type", "txt")
+                                .append("path", "C:/doc/2.txt")
+                        )
+                )
+                .append("files",
+                        Arrays.asList(
+                                Logme.createParameters()
+                                        .append("type", "pdf")
+                                        .append("path", "C:/doc/1.pdf"),
+                                Logme.createParameters()
+                                        .append("type", "txt")
+                                        .append("path", "C:/doc/2.txt")
+                        )
+                )
+                .toString();
+
+        System.out.println(actualMessage);
+    }
+
 }
