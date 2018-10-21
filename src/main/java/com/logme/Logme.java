@@ -1,23 +1,36 @@
 package com.logme;
 
-public class Logme {
+public final class Logme {
 
     private Logme() {}
 
-    public static LogMessage createMessage(String text) {
-        return new LogMessageBuilder(text);
+    // todo: поддержать
+//    public static LogMessage newMessageBuilder() {
+//        return new LogMessageBuilder();
+//    }
+
+    public static MessageBuilder newMessageBuilder(String text) {
+        return new MessageBuilderImpl(text);
     }
 
-    public static LogMessage createMessage(String id, String text) {
-        return new LogMessageBuilder(id, text);
+    public static MessageBuilder newMessageBuilder(String text, int numberOfIndents) {
+        return new MessageBuilderImpl(text, numberOfIndents);
     }
 
-    public static LogParameters createParameters() {
-        return new LogParametersBuilder();
+    public static MessageBuilder newMessageBuilder(String id, String text) {
+        return new MessageBuilderImpl(id, text);
     }
 
-    public static LogParameters createParameters(boolean multiline, int numberOfIndents) {
-        return new LogParametersBuilder(multiline, numberOfIndents);
+    public static MessageBuilder newMessageBuilder(String id, String text, int numberOfIndents) {
+        return new MessageBuilderImpl(id, text, numberOfIndents);
+    }
+
+    public static ParameterBuilder newParameterBuilder() {
+        return new ParameterBuilderImpl();
+    }
+
+    public static ParameterBuilder newParameterBuilder(int numberOfIndents) {
+        return new ParameterBuilderImpl(numberOfIndents);
     }
 
 }

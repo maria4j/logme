@@ -10,19 +10,19 @@ class LogmeTest {
 
     @Test
     void createMessage_withText_appended() {
-        String actualMessage = Logme.createMessage("Something happened").toString();
+        String actualMessage = Logme.newMessageBuilder("Something happened").toString();
         Assertions.assertEquals("Something happened", actualMessage);
     }
 
     @Test
     void createMessage_withIdAndText_appended() {
-        String actualMessage = Logme.createMessage("SMTH-HPND", "Something happened").toString();
+        String actualMessage = Logme.newMessageBuilder("SMTH-HPND", "Something happened").toString();
         Assertions.assertEquals("[SMTH-HPND] Something happened", actualMessage);
     }
 
     @Test
     void createMessage_withTextAndTwoParameters_appended() {
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
                 .toString();
@@ -32,7 +32,7 @@ class LogmeTest {
 
     @Test
     void createMessage_withTextAppendedAfterCreateMessage_textAppendedToOriginal() {
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendText(" at this moment. Let's fix it")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
@@ -55,7 +55,7 @@ class LogmeTest {
     // createMessage_itShouldBuildMessageRegardlessOfMethodCallOrder()
     @Test
     void createMessage_withTextAppendedAfterSetParameters_textAppendedToOriginal() {
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
                 .appendText(" at this moment. Let's fix it")
@@ -66,7 +66,7 @@ class LogmeTest {
 
     @Test
     void createMessage_withTextAndTwoParametersOneOfWhichIsStringArray_appended() {
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("numbers", new String[]{"1", "2", "3"})
                 .toString();
@@ -77,12 +77,12 @@ class LogmeTest {
     @Test
     void createMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithOneItem_appended() {
         // TODO: String[] неудобно, потому что тогда нарушается конструирование в динамике
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Collections.singletonList(
-                        Logme.createParameters()
-                                .append("type", "pdf")
-                                .append("path", "C:/doc/1.pdf"))
+                        Logme.newParameterBuilder()
+                                .appendParameter("type", "pdf")
+                                .appendParameter("path", "C:/doc/1.pdf"))
                 ).toString();
 
         Assertions.assertEquals("Something happened {id=36f6f78hje, files=[{type=pdf, path=C:/doc/1.pdf}]}", actualMessage);
@@ -90,15 +90,15 @@ class LogmeTest {
 
     @Test
     void createMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithTwoItems_appended() {
-        String actualMessage = Logme.createMessage("Something happened")
+        String actualMessage = Logme.newMessageBuilder("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Arrays.asList(
-                        Logme.createParameters()
-                                .append("type", "pdf")
-                                .append("path", "C:/doc/1.pdf"),
-                        Logme.createParameters()
-                                .append("type", "txt")
-                                .append("path", "C:/doc/2.txt"))
+                        Logme.newParameterBuilder()
+                                .appendParameter("type", "pdf")
+                                .appendParameter("path", "C:/doc/1.pdf"),
+                        Logme.newParameterBuilder()
+                                .appendParameter("type", "txt")
+                                .appendParameter("path", "C:/doc/2.txt"))
                 ).toString();
         
         Assertions.assertEquals("Something happened {id=36f6f78hje, files=[{type=pdf, path=C:/doc/1.pdf}, {type=txt, path=C:/doc/2.txt}]}", actualMessage);
@@ -106,27 +106,27 @@ class LogmeTest {
 
     @Test
     void createMessage_multiline_formatted() {
-        String actualMessage = Logme.createParameters(true, 1)
-                .append("type", "pdf")
-                .append("path", "C:/doc/1.pdf")
-                .append("files",
+        String actualMessage = Logme.newParameterBuilder(1)
+                .appendParameter("type", "pdf")
+                .appendParameter("path", "C:/doc/1.pdf")
+                .appendParameter("files",
                         Arrays.asList(
-                            Logme.createParameters(true, 2)
-                                .append("type", "pdf")
-                                .append("path", "C:/doc/1.pdf"),
-                            Logme.createParameters(true, 2)
-                                .append("type", "txt")
-                                .append("path", "C:/doc/2.txt")
+                            Logme.newParameterBuilder(2)
+                                .appendParameter("type", "pdf")
+                                .appendParameter("path", "C:/doc/1.pdf"),
+                            Logme.newParameterBuilder(2)
+                                .appendParameter("type", "txt")
+                                .appendParameter("path", "C:/doc/2.txt")
                         )
                 )
-                .append("files",
+                .appendParameter("files",
                         Arrays.asList(
-                                Logme.createParameters()
-                                        .append("type", "pdf")
-                                        .append("path", "C:/doc/1.pdf"),
-                                Logme.createParameters()
-                                        .append("type", "txt")
-                                        .append("path", "C:/doc/2.txt")
+                                Logme.newParameterBuilder()
+                                        .appendParameter("type", "pdf")
+                                        .appendParameter("path", "C:/doc/1.pdf"),
+                                Logme.newParameterBuilder()
+                                        .appendParameter("type", "txt")
+                                        .appendParameter("path", "C:/doc/2.txt")
                         )
                 )
                 .toString();
