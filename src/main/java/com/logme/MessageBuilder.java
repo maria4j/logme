@@ -4,9 +4,9 @@ import java.util.Collection;
 
 public interface MessageBuilder {
 
-    // Вообще относится к параметрам
-    int getNumberOfIndents();
+    int getParametersIndent();
 
+    // todo: delete when changed api to flow builder
     boolean hasParameters();
 
     MessageBuilder appendText(String text);

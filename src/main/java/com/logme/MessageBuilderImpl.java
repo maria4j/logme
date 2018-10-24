@@ -12,18 +12,18 @@ class MessageBuilderImpl implements MessageBuilder {
         this(null, text, -1);
     }
 
-    MessageBuilderImpl(String text, int numberOfIndents) {
-        this(null, text, numberOfIndents);
+    MessageBuilderImpl(String text, int indent) {
+        this(null, text, indent);
     }
 
     MessageBuilderImpl(String id, String text) {
         this(id, text, -1);
     }
 
-    MessageBuilderImpl(String id, String text, int numberOfIndents) {
+    MessageBuilderImpl(String id, String text, int indent) {
         this.id = id;
         this.textBuilder = new StringBuilder(text);
-        this.parameterBuilder = new ParameterBuilderImpl(numberOfIndents);
+        this.parameterBuilder = new ParameterBuilderImpl(indent);
     }
 
     @Override
@@ -38,7 +38,7 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
-    public int getNumberOfIndents() {
+    public int getParametersIndent() {
         return parameterBuilder.getIndent();
     }
 
