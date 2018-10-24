@@ -39,7 +39,7 @@ class MessageBuilderImpl implements MessageBuilder {
 
     @Override
     public int getNumberOfIndents() {
-        return parameterBuilder.getNumberOfIndents();
+        return parameterBuilder.getIndent();
     }
 
     @Override

@@ -8,27 +8,29 @@ import java.util.Collection;
  */
 class ParameterBuilderImpl implements ParameterBuilder {
 
+    private static final int TAB_SIZE = 4;
+
     private final StringBuilder stringBuilder = new StringBuilder();
-    private final int numberOfIndents;
+    private final int indent;
     private final String indentString;
 
     ParameterBuilderImpl() {
         this(-1);
     }
 
-    ParameterBuilderImpl(int numberOfIndents) {
-        this.numberOfIndents = numberOfIndents;
+    ParameterBuilderImpl(int indent) {
+        this.indent = indent;
 
-        if (numberOfIndents <= 0) {
+        if (indent <= 0) {
             indentString = ""; // todo: возможно, чтобы было более очевидно, если < 0, то null
         } else {
-            indentString = buildIndentString(numberOfIndents);
+            indentString = buildIndentString(TAB_SIZE * indent);
         }
     }
 
     @Override
-    public int getNumberOfIndents() {
-        return numberOfIndents;
+    public int getIndent() {
+        return indent;
     }
 
     @Override
@@ -120,14 +122,14 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     private boolean hasIndents() {
-        return numberOfIndents >= 0;
+        return indent >= 0;
     }
 
-    private String buildIndentString(int numberOfIndents) {
+    private String buildIndentString(int indent) {
         StringBuilder indentBuilder = new StringBuilder();
-        int count = numberOfIndents;
+        int count = indent;
         while (count > 0) {
-            indentBuilder.append('\t');
+            indentBuilder.append(' ');
             count--;
         }
         return indentBuilder.toString();
@@ -136,10 +138,10 @@ class ParameterBuilderImpl implements ParameterBuilder {
     @Override
     public String toString() {
         if (hasIndents()) {
-            if (numberOfIndents <= 0) {
+            if (indent <= 0) {
                 return "{" + System.lineSeparator() + stringBuilder.toString() + System.lineSeparator() + "}";
             }
-            String lastIndentString = buildIndentString(numberOfIndents - 1);
+            String lastIndentString = buildIndentString(indent - 1);
             return "{" + System.lineSeparator() + stringBuilder.toString() + System.lineSeparator() + lastIndentString + "}";
         }
         return "{" + stringBuilder.toString() + "}";
