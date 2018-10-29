@@ -9,19 +9,19 @@ import java.util.Collections;
 class LogmeTest {
 
     @Test
-    void createMessage_withText_appended() {
+    void newMessage_withText_appended() {
         String actualMessage = Logme.newMessage("Something happened").toString();
         Assertions.assertEquals("Something happened", actualMessage);
     }
 
     @Test
-    void createMessage_withIdAndText_appended() {
+    void newMessage_withIdAndText_appended() {
         String actualMessage = Logme.newMessage("SMTH-HPND", "Something happened").toString();
         Assertions.assertEquals("[SMTH-HPND] Something happened", actualMessage);
     }
 
     @Test
-    void createMessage_withTextAndTwoParameters_appended() {
+    void newMessage_withTextAndTwoParameters_appended() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
@@ -31,7 +31,7 @@ class LogmeTest {
     }
 
     @Test
-    void createMessage_withTextAppendedAfterCreateMessage_textAppendedToOriginal() {
+    void newMessage_withTextAppendedAfterNewMessage_textAppendedToOriginal() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendText(" at this moment. Let's fix it")
                 .appendParameter("id", "36f6f78hje")
@@ -52,9 +52,9 @@ class LogmeTest {
      * payloadArray : payload | payload ', ' payloadArray
      * payload, name, simpleValue: java.lang.String
      */
-    // createMessage_itShouldBuildMessageRegardlessOfMethodCallOrder()
+    // newMessage_itShouldBuildMessageRegardlessOfMethodCallOrder()
     @Test
-    void createMessage_withTextAppendedAfterSetParameters_textAppendedToOriginal() {
+    void newMessage_withTextAppendedAfterParameters_textAppendedToOriginal() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
@@ -65,7 +65,7 @@ class LogmeTest {
     }
 
     @Test
-    void createMessage_withTextAndTwoParametersOneOfWhichIsStringArray_appended() {
+    void newMessage_withTextAndTwoParametersOneOfWhichIsStringArray_appended() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("numbers", new String[]{"1", "2", "3"})
@@ -75,7 +75,7 @@ class LogmeTest {
     }
 
     @Test
-    void createMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithOneItem_appended() {
+    void newMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithOneItem_appended() {
         // TODO: String[] неудобно, потому что тогда нарушается конструирование в динамике
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
@@ -89,7 +89,7 @@ class LogmeTest {
     }
 
     @Test
-    void createMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithTwoItems_appended() {
+    void newMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithTwoItems_appended() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Arrays.asList(
@@ -105,8 +105,8 @@ class LogmeTest {
     }
 
     @Test
-    void createMessage_multiline_formatted() {
-        String actualMessage = Logme.newParameters(1)
+    void newMessage_multiline_formatted() {
+        String actualMessage = Logme.newMessage("Something happened", 1)
                 .appendParameter("type", "pdf")
                 .appendParameter("path", "C:/doc/1.pdf")
                 .appendParameter("files",
@@ -131,7 +131,19 @@ class LogmeTest {
                 )
                 .toString();
 
-        System.out.println(actualMessage);
+        String eol = System.lineSeparator();
+        Assertions.assertEquals("Something happened {" + eol +
+                "    type=pdf, " + eol +
+                "    path=C:/doc/1.pdf, " + eol +
+                "    files=[{" + eol +
+                "        type=pdf, " + eol +
+                "        path=C:/doc/1.pdf" + eol +
+                " }, {" + eol +
+                "        type=txt, " + eol +
+                "        path=C:/doc/2.txt" + eol +
+                " }], " + eol +
+                "    files=[{type=pdf, path=C:/doc/1.pdf}, {type=txt, path=C:/doc/2.txt}]" + eol +
+                "}", actualMessage);
     }
 
 }
