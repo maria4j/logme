@@ -68,15 +68,35 @@ class LogmeTest {
     void newMessage_withTextAndTwoParametersOneOfWhichIsStringArray_appended() {
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
-                .appendParameter("numbers", new String[]{"1", "2", "3"})
+                .appendParameter("numbers", new String[] {"1", "2", "3"})
                 .toString();
 
         Assertions.assertEquals("Something happened {id=36f6f78hje, numbers=[1, 2, 3]}", actualMessage);
     }
 
     @Test
+    void newMessage_withTextAndTwoParametersOneOfWhichIsIntegerArray_appended() {
+        String actualMessage = Logme.newMessage("Something happened")
+                .appendParameter("id", "36f6f78hje")
+                .appendParameter("numbers", new Integer[] {1, 2, 3})
+                .toString();
+
+        Assertions.assertEquals("Something happened {id=36f6f78hje, numbers=[1, 2, 3]}", actualMessage);
+    }
+
+    @Test
+    void newMessage_withValueAsStringCollection_appended() {
+        String actualMessage = Logme.newMessage("Something happened")
+                .appendParameter("id", "36f6f78hje")
+                .appendParameter("numbers", Arrays.asList("1", "2", "3"))
+                .toString();
+
+        Assertions.assertEquals("Something happened {id=36f6f78hje, numbers=[1, 2, 3]}", actualMessage);
+
+    }
+
+    @Test
     void newMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithOneItem_appended() {
-        // TODO: String[] неудобно, потому что тогда нарушается конструирование в динамике
         String actualMessage = Logme.newMessage("Something happened")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Collections.singletonList(

@@ -10,8 +10,8 @@ public interface ParameterBuilder {
 
     ParameterBuilder appendParameter(String name, String value);
 
-    ParameterBuilder appendParameter(String name, String[] values);
+    <T> ParameterBuilder appendParameter(String name, T[] values);
 
-    ParameterBuilder appendParameter(String name, Collection<ParameterBuilder> values);
+    <T> ParameterBuilder appendParameter(String name, Collection<T> values);
 
 }

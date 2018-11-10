@@ -49,13 +49,13 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
-    public MessageBuilder appendParameter(String name, String[] values) {
+    public <T> MessageBuilder appendParameter(String name, T[] values) {
         parameterBuilder.appendParameter(name, values);
         return this;
     }
 
     @Override
-    public MessageBuilder appendParameter(String name, Collection<ParameterBuilder> values) {
+    public <T> MessageBuilder appendParameter(String name, Collection<T> values) {
         parameterBuilder.appendParameter(name, values);
         return this;
     }

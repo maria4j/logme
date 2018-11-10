@@ -58,7 +58,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
-    public ParameterBuilder appendParameter(String name, String[] values) {
+    public <T> ParameterBuilder appendParameter(String name, T[] values) {
         if (hasParameters()) {
             stringBuilder.append(", ");
 
@@ -74,14 +74,14 @@ class ParameterBuilderImpl implements ParameterBuilder {
         stringBuilder.append(name).append("=[");
 
         boolean empty = true;
-        for (String value : values) {
+        for (T value : values) {
             if (empty) {
                 empty = false;
             } else {
                 stringBuilder.append(", ");
             }
 
-            stringBuilder.append(value);
+            stringBuilder.append(value.toString());
         }
 
         stringBuilder.append("]");
@@ -90,7 +90,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
-    public ParameterBuilder appendParameter(String name, Collection<ParameterBuilder> values) {
+    public <T> ParameterBuilder appendParameter(String name, Collection<T> values) {
         if (hasParameters()) {
             stringBuilder.append(", ");
 
@@ -106,7 +106,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
         stringBuilder.append(name).append("=[");
 
         boolean empty = true;
-        for (ParameterBuilder value : values) {
+        for (Object value : values) {
             if (empty) {
                 empty = false;
             } else {

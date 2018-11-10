@@ -13,8 +13,8 @@ public interface MessageBuilder {
 
     MessageBuilder appendParameter(String name, String value);
 
-    MessageBuilder appendParameter(String name, String[] values);
+    <T> MessageBuilder appendParameter(String name, T[] values);
 
-    MessageBuilder appendParameter(String name, Collection<ParameterBuilder> values);
+    <T> MessageBuilder appendParameter(String name, Collection<T> values);
 
 }
