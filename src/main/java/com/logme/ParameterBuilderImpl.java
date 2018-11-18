@@ -29,6 +29,16 @@ class ParameterBuilderImpl implements ParameterBuilder {
         }
     }
 
+    private static String buildIndentString(int indent) {
+        StringBuilder indentBuilder = new StringBuilder();
+        int count = indent;
+        while (count > 0) {
+            indentBuilder.append(' ');
+            count--;
+        }
+        return indentBuilder.toString();
+    }
+
     @Override
     public int getIndent() {
         return indent;
@@ -40,37 +50,64 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
-    public ParameterBuilder appendParameter(String name, String value) {
-        if (hasParameters()) {
-            stringBuilder.append(", ");
-
-            if (hasIndents()) {
-                stringBuilder.append(System.lineSeparator());
-            }
-        }
-
-        if (hasIndents()) {
-            stringBuilder.append(indentString);
-        }
-
+    public ParameterBuilder appendParameter(String name, boolean value) {
+        appendSeparators();
         stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
 
+    @Override
+    public ParameterBuilder appendParameter(String name, byte value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, char value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, double value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, float value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, int value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, long value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
+        return this;
+    }
+
+    @Override
+    public ParameterBuilder appendParameter(String name, String value) {
+        appendSeparators();
+        stringBuilder.append(name).append("=").append(value);
         return this;
     }
 
     @Override
     public <T> ParameterBuilder appendParameter(String name, T[] values) {
-        if (hasParameters()) {
-            stringBuilder.append(", ");
-
-            if (hasIndents()) {
-                stringBuilder.append(System.lineSeparator());
-            }
-        }
-
-        if (hasIndents()) {
-            stringBuilder.append(indentString);
-        }
+        appendSeparators();
 
         stringBuilder.append(name).append("=[");
 
@@ -92,17 +129,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
 
     @Override
     public <T> ParameterBuilder appendParameter(String name, Collection<T> values) {
-        if (hasParameters()) {
-            stringBuilder.append(", ");
-
-            if (hasIndents()) {
-                stringBuilder.append(System.lineSeparator());
-            }
-        }
-
-        if (hasIndents()) {
-            stringBuilder.append(indentString);
-        }
+        appendSeparators();
 
         stringBuilder.append(name).append("=[");
 
@@ -126,14 +153,18 @@ class ParameterBuilderImpl implements ParameterBuilder {
         return indent >= 0;
     }
 
-    private String buildIndentString(int indent) {
-        StringBuilder indentBuilder = new StringBuilder();
-        int count = indent;
-        while (count > 0) {
-            indentBuilder.append(' ');
-            count--;
+    private void appendSeparators() {
+        if (hasParameters()) {
+            stringBuilder.append(", ");
+
+            if (hasIndents()) {
+                stringBuilder.append(System.lineSeparator());
+            }
         }
-        return indentBuilder.toString();
+
+        if (hasIndents()) {
+            stringBuilder.append(indentString);
+        }
     }
 
     @Override

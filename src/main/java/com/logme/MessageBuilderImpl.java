@@ -33,6 +33,48 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
+    public MessageBuilder appendParameter(String name, boolean value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, byte value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, char value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, double value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, float value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, int value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
+    public MessageBuilder appendParameter(String name, long value) {
+        parameterBuilder.appendParameter(name, value);
+        return this;
+    }
+
+    @Override
     public boolean hasParameters() {
         return parameterBuilder.hasParameters();
     }
