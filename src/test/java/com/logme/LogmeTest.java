@@ -9,8 +9,20 @@ import java.util.Collections;
 class LogmeTest {
 
     @Test
+    void newMessage_default_emptyTextAppended() {
+        String actualMessage = Logme.newMessage().toString();
+        Assertions.assertEquals("", actualMessage);
+    }
+
+    @Test
     void newMessage_withText_appended() {
         String actualMessage = Logme.newMessage("Something happened").toString();
+        Assertions.assertEquals("Something happened", actualMessage);
+    }
+
+    @Test
+    void newMessage_withLazyText_appended() {
+        String actualMessage = Logme.newMessage().appendText("Something happened").toString();
         Assertions.assertEquals("Something happened", actualMessage);
     }
 

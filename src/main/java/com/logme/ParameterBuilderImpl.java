@@ -8,6 +8,7 @@ import java.util.Collection;
  */
 class ParameterBuilderImpl implements ParameterBuilder {
 
+    private static final int NO_INDENT = -1;
     private static final int TAB_SIZE = 4;
 
     private final StringBuilder stringBuilder = new StringBuilder();
@@ -15,7 +16,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
     private final String indentString;
 
     ParameterBuilderImpl() {
-        this(-1);
+        this(NO_INDENT);
     }
 
     ParameterBuilderImpl(int indent) {

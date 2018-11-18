@@ -8,22 +8,22 @@ class MessageBuilderImpl implements MessageBuilder {
     private final StringBuilder textBuilder;
     private final ParameterBuilder parameterBuilder;
 
-    MessageBuilderImpl(String text) {
-        this(null, text, -1);
+    MessageBuilderImpl(ParameterBuilder parameterBuilder) {
+        this.id = null;
+        this.textBuilder = new StringBuilder();
+        this.parameterBuilder = parameterBuilder;
     }
 
-    MessageBuilderImpl(String text, int indent) {
-        this(null, text, indent);
+    MessageBuilderImpl(String text, ParameterBuilder parameterBuilder) {
+        this.id = null;
+        this.textBuilder = new StringBuilder(text);
+        this.parameterBuilder = parameterBuilder;
     }
 
-    MessageBuilderImpl(String id, String text) {
-        this(id, text, -1);
-    }
-
-    MessageBuilderImpl(String id, String text, int indent) {
+    MessageBuilderImpl(String id, String text, ParameterBuilder parameterBuilder) {
         this.id = id;
         this.textBuilder = new StringBuilder(text);
-        this.parameterBuilder = new ParameterBuilderImpl(indent);
+        this.parameterBuilder = parameterBuilder;
     }
 
     @Override
