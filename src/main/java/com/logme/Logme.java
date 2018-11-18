@@ -4,13 +4,16 @@ public final class Logme {
 
     private Logme() {}
 
-    // todo: поддержать
-//    public static LogMessage newMessage() {
-//        return new LogMessageBuilder();
-//    }
+    public static MessageBuilder newMessage() {
+        return new MessageBuilderImpl();
+    }
 
     public static MessageBuilder newMessage(String text) {
         return new MessageBuilderImpl(text);
+    }
+
+    public static MessageBuilder newMessage(int indent) {
+        return new MessageBuilderImpl(indent);
     }
 
     public static MessageBuilder newMessage(String text, int indent) {
