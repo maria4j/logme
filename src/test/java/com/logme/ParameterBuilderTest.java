@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 class ParameterBuilderTest {
 
     @Test
-    void appendParameter_byteValue_appended() {
-        byte value = 1;
-        String actualMessage = Logme.newParameters().appendParameter("value", value).toString();
-        Assertions.assertEquals(actualMessage, "{value=1}");
-    }
-
-    @Test
     void appendParameter_booleanValue_appended() {
         boolean value = true;
         String actualMessage = Logme.newParameters().appendParameter("value", value).toString();
         Assertions.assertEquals(actualMessage, "{value=true}");
+    }
+
+    @Test
+    void appendParameter_byteValue_appended() {
+        byte value = 1;
+        String actualMessage = Logme.newParameters().appendParameter("value", value).toString();
+        Assertions.assertEquals(actualMessage, "{value=1}");
     }
 
     @Test
