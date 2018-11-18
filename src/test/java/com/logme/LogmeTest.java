@@ -170,10 +170,10 @@ class LogmeTest {
                 "    files=[{" + eol +
                 "        type=pdf, " + eol +
                 "        path=C:/doc/1.pdf" + eol +
-                " }, {" + eol +
+                "    }, {" + eol +
                 "        type=txt, " + eol +
                 "        path=C:/doc/2.txt" + eol +
-                " }], " + eol +
+                "    }], " + eol +
                 "    files=[{type=pdf, path=C:/doc/1.pdf}, {type=txt, path=C:/doc/2.txt}]" + eol +
                 "}", actualMessage);
     }
