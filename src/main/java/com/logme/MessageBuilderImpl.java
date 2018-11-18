@@ -6,37 +6,24 @@ class MessageBuilderImpl implements MessageBuilder {
 
     private final String id;
     private final StringBuilder textBuilder;
-    // todo: move parameterBuilder creation to Logme
     private final ParameterBuilder parameterBuilder;
 
-    MessageBuilderImpl() {
+    MessageBuilderImpl(ParameterBuilder parameterBuilder) {
         this.id = null;
         this.textBuilder = new StringBuilder();
-        this.parameterBuilder = new ParameterBuilderImpl(-1);
+        this.parameterBuilder = parameterBuilder;
     }
 
-    MessageBuilderImpl(String text) {
-        this(null, text, -1);
-    }
-
-    MessageBuilderImpl(int indent) {
+    MessageBuilderImpl(String text, ParameterBuilder parameterBuilder) {
         this.id = null;
-        this.textBuilder = new StringBuilder();
-        this.parameterBuilder = new ParameterBuilderImpl(indent);
+        this.textBuilder = new StringBuilder(text);
+        this.parameterBuilder = parameterBuilder;
     }
 
-    MessageBuilderImpl(String text, int indent) {
-        this(null, text, indent);
-    }
-
-    MessageBuilderImpl(String id, String text) {
-        this(id, text, -1);
-    }
-
-    MessageBuilderImpl(String id, String text, int indent) {
+    MessageBuilderImpl(String id, String text, ParameterBuilder parameterBuilder) {
         this.id = id;
         this.textBuilder = new StringBuilder(text);
-        this.parameterBuilder = new ParameterBuilderImpl(indent);
+        this.parameterBuilder = parameterBuilder;
     }
 
     @Override

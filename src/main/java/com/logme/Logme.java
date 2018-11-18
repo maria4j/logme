@@ -5,27 +5,33 @@ public final class Logme {
     private Logme() {}
 
     public static MessageBuilder newMessage() {
-        return new MessageBuilderImpl();
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl();
+        return new MessageBuilderImpl(parameterBuilder);
     }
 
     public static MessageBuilder newMessage(String text) {
-        return new MessageBuilderImpl(text);
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl();
+        return new MessageBuilderImpl(text, parameterBuilder);
     }
 
     public static MessageBuilder newMessage(int indent) {
-        return new MessageBuilderImpl(indent);
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(indent);
+        return new MessageBuilderImpl(parameterBuilder);
     }
 
     public static MessageBuilder newMessage(String text, int indent) {
-        return new MessageBuilderImpl(text, indent);
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(indent);
+        return new MessageBuilderImpl(text, parameterBuilder);
     }
 
     public static MessageBuilder newMessage(String id, String text) {
-        return new MessageBuilderImpl(id, text);
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl();
+        return new MessageBuilderImpl(id, text, parameterBuilder);
     }
 
     public static MessageBuilder newMessage(String id, String text, int indent) {
-        return new MessageBuilderImpl(id, text, indent);
+        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(indent);
+        return new MessageBuilderImpl(id, text, parameterBuilder);
     }
 
     public static ParameterBuilder newParameters() {
