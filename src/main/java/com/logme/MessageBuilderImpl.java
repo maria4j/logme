@@ -85,7 +85,7 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
-    public MessageBuilder appendParameter(String name, String value) {
+    public MessageBuilder appendParameter(String name, Object value) {
         parameterBuilder.appendParameter(name, value);
         return this;
     }

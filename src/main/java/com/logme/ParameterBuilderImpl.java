@@ -99,7 +99,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
-    public ParameterBuilder appendParameter(String name, String value) {
+    public ParameterBuilder appendParameter(String name, Object value) {
         appendSeparators();
         stringBuilder.append(name).append("=").append(value);
         return this;

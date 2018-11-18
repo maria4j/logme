@@ -22,7 +22,7 @@ public interface ParameterBuilder {
 
     ParameterBuilder appendParameter(String name, long value);
 
-    ParameterBuilder appendParameter(String name, String value);
+    ParameterBuilder appendParameter(String name, Object value);
 
     <T> ParameterBuilder appendParameter(String name, T[] values);
 
