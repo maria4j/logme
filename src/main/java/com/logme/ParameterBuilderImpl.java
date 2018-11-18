@@ -173,7 +173,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
             if (indent <= 0) {
                 return "{" + System.lineSeparator() + stringBuilder.toString() + System.lineSeparator() + "}";
             }
-            String lastIndentString = buildIndentString(indent - 1);
+            String lastIndentString = buildIndentString(TAB_SIZE * (indent - 1));
             return "{" + System.lineSeparator() + stringBuilder.toString() + System.lineSeparator() + lastIndentString + "}";
         }
         return "{" + stringBuilder.toString() + "}";
