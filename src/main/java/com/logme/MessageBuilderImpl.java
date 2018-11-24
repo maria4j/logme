@@ -102,13 +102,16 @@ class MessageBuilderImpl implements MessageBuilder {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (id != null) {
-            stringBuilder.append("[").append(id).append("] ");
+            stringBuilder.append(PunctuationMark.OPENING_BRACKET.value())
+                         .append(id)
+                         .append(PunctuationMark.CLOSING_BRACKET.value())
+                         .append(PunctuationMark.SPACE.value());
         }
 
         stringBuilder.append(textBuilder);
 
         if (hasParameters()) {
-            stringBuilder.append(" ").append(parameterBuilder);
+            stringBuilder.append(PunctuationMark.SPACE.value()).append(parameterBuilder);
         }
 
         return stringBuilder.toString();
