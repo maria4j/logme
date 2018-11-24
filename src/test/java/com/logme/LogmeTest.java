@@ -67,13 +67,28 @@ class LogmeTest {
     // newMessage_itShouldBuildMessageRegardlessOfMethodCallOrder()
     @Test
     void newMessage_withTextAppendedAfterParameters_textAppendedToOriginal() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened at this moment")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
-                .appendText(" at this moment. Let's fix it")
+                .appendText(". Let's fix it")
                 .toString();
 
-        Assertions.assertEquals("Something happened at this moment. Let's fix it {id=36f6f78hje, type=plain}", actualMessage);
+        Assertions.assertEquals("Something happened at this moment {id=36f6f78hje, type=plain}. Let's fix it", actualMessage);
+    }
+
+    @Test
+    void newMessage_withMultipleTextAndParametersParameters_textAppendedToOriginal() {
+        String actualMessage = Logme.newMessage("Something happened at this moment")
+                .appendParameter("id", "36f6f78hje")
+                .appendParameter("type", "plain")
+                .appendText(". Let's fix it, more details:")
+                .appendParameter("file1", "C:/bin/cfg1.xml")
+                .appendParameter("file2", "C:/bin/cfg2.xml")
+                .appendParameter("file3", "C:/bin/cfg3.xml")
+                .appendText("Good luck!")
+                .toString();
+
+        Assertions.assertEquals("Something happened at this moment {id=36f6f78hje, type=plain}. Let's fix it, more details: {file1=C:/bin/cfg1.xml, file2=C:/bin/cfg2.xml, file3=C:/bin/cfg3.xml}Good luck!", actualMessage);
     }
 
     @Test

@@ -8,8 +8,6 @@ public interface ParameterBuilder {
 
     IndentationStyle getIndentationStyle();
 
-    boolean hasParameters();
-
     // todo: defaultValue appendParameter("name", "value", "<не задано>") -> или условие обработки (функция?) -> Supplier
     // todo: supplier пока что не нужен, пояснить, что multilineSeparator не страшен, т.к. основная часть сообщений в логах - однострочные
 

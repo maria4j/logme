@@ -18,7 +18,7 @@ package com.logme.punctuation;
  */
 public class OtbsIndentationStyle implements IndentationStyle {
 
-    static final int TAB_SIZE = 4;
+    private static final int TAB_SIZE = 4;
 
     private final int indentLevel;
     private final String indent;

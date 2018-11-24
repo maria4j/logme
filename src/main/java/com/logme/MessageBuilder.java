@@ -4,9 +4,6 @@ import java.util.Collection;
 
 public interface MessageBuilder {
 
-    // todo: delete when changed api to flow builder
-    boolean hasParameters();
-
     MessageBuilder appendText(String text);
 
     MessageBuilder appendParameter(String name, boolean value);
