@@ -4,6 +4,8 @@ import java.util.Collection;
 
 public interface MessageBuilder {
 
+    MessageBuilder appendMarker(String marker);
+
     MessageBuilder appendText(String text);
 
     MessageBuilder appendParameter(String name, boolean value);

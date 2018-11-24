@@ -6,30 +6,31 @@ import java.util.Collection;
 
 class MessageBuilderImpl implements MessageBuilder {
 
-    private final String id;
     private final StringBuilder mainBuilder;
     private final ParameterBuilderFactory parameterBuilderFactory;
     private ParameterBuilder currentParameterBuilder;
 
     MessageBuilderImpl(ParameterBuilderFactory parameterBuilderFactory) {
-        this.id = null;
         this.mainBuilder = new StringBuilder();
         this.parameterBuilderFactory = parameterBuilderFactory;
         this.currentParameterBuilder = null;
     }
 
     MessageBuilderImpl(String text, ParameterBuilderFactory parameterBuilderFactory) {
-        this.id = null;
         this.mainBuilder = new StringBuilder(text);
         this.parameterBuilderFactory = parameterBuilderFactory;
         this.currentParameterBuilder = null;
     }
 
-    MessageBuilderImpl(String id, String text, ParameterBuilderFactory parameterBuilderFactory) {
-        this.id = id;
-        this.mainBuilder = new StringBuilder(text);
-        this.parameterBuilderFactory = parameterBuilderFactory;
-        this.currentParameterBuilder = null;
+    @Override
+    public MessageBuilder appendMarker(String marker) {
+        flushParameters();
+
+        mainBuilder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
+                   .append(marker)
+                   .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value());
+
+        return this;
     }
 
     @Override
@@ -132,20 +133,8 @@ class MessageBuilderImpl implements MessageBuilder {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (id != null) {
-            stringBuilder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
-                         .append(id)
-                         .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value())
-                         .append(PunctuationMark.SPACE.value());
-        }
-
         flushParameters();
-
-        stringBuilder.append(mainBuilder);
-
-        return stringBuilder.toString();
+        return mainBuilder.toString();
     }
 
 }
