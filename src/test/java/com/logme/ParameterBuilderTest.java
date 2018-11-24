@@ -55,4 +55,12 @@ class ParameterBuilderTest {
         Assertions.assertEquals("{value=1}", actualMessage);
     }
 
+    @Test
+    void appendParameter_null_nullDefaultAppended() {
+        String value = null;
+        String nullDefault = "<not specified>";
+        String actualMessage = Logme.newParameters().appendParameter("value", nullDefault).toString();
+        Assertions.assertEquals("{value=<not specified>}", actualMessage);
+
+    }
 }

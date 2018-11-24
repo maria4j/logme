@@ -98,6 +98,13 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
+    public MessageBuilder appendParameter(String name, Object value, Object nullDefault) {
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value, nullDefault);
+        return this;
+    }
+
+    @Override
     public <T> MessageBuilder appendParameter(String name, T[] values) {
         initParameters();
         currentParameterBuilder.appendParameter(name, values);

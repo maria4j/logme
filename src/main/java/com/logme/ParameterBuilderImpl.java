@@ -96,6 +96,14 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
+    public ParameterBuilder appendParameter(String name, Object value, Object nullDefault) {
+        appendDelimiter();
+        final Object appendingValue = value != null ? value : nullDefault;
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(appendingValue);
+        return null;
+    }
+
+    @Override
     public <T> ParameterBuilder appendParameter(String name, T[] values) {
         appendDelimiter();
 

@@ -8,9 +8,6 @@ public interface ParameterBuilder {
 
     IndentationStyle getIndentationStyle();
 
-    // todo: defaultValue appendParameter("name", "value", "<не задано>") -> или условие обработки (функция?) -> Supplier
-    // todo: supplier пока что не нужен, пояснить, что multilineSeparator не страшен, т.к. основная часть сообщений в логах - однострочные
-
     ParameterBuilder appendParameter(String name, boolean value);
 
     ParameterBuilder appendParameter(String name, byte value);
@@ -26,6 +23,8 @@ public interface ParameterBuilder {
     ParameterBuilder appendParameter(String name, long value);
 
     ParameterBuilder appendParameter(String name, Object value);
+
+    ParameterBuilder appendParameter(String name, Object value, Object nullDefault);
 
     <T> ParameterBuilder appendParameter(String name, T[] values);
 

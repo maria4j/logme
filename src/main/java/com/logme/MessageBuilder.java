@@ -24,6 +24,8 @@ public interface MessageBuilder {
 
     MessageBuilder appendParameter(String name, Object value);
 
+    MessageBuilder appendParameter(String name, Object value, Object nullDefault);
+
     <T> MessageBuilder appendParameter(String name, T[] values);
 
     <T> MessageBuilder appendParameter(String name, Collection<T> values);
