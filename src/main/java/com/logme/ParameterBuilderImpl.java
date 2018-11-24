@@ -100,7 +100,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
         appendDelimiter();
         final Object appendingValue = value != null ? value : nullDefault;
         stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(appendingValue);
-        return null;
+        return this;
     }
 
     @Override

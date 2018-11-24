@@ -15,14 +15,14 @@ public final class Logme {
         return new MessageBuilderImpl(text, ParameterBuilderFactoryImpl.DEFAULT);
     }
 
-    public static MessageBuilder newMessage(int indent) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
+    public static MessageBuilder newMessage(int indentLevel) {
+        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
         final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
         return new MessageBuilderImpl(parameterBuilderFactory);
     }
 
-    public static MessageBuilder newMessage(String text, int indent) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
+    public static MessageBuilder newMessage(String text, int indentLevel) {
+        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
         final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
         return new MessageBuilderImpl(text, parameterBuilderFactory);
     }
@@ -31,8 +31,8 @@ public final class Logme {
         return ParameterBuilderFactoryImpl.DEFAULT.newParameterBuilder();
     }
 
-    public static ParameterBuilder newParameters(int indent) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
+    public static ParameterBuilder newParameters(int indentLevel) {
+        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
         final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
         return parameterBuilderFactory.newParameterBuilder();
     }
