@@ -1,6 +1,6 @@
-package com.logme;
+package com.logme.punctuation;
 
-interface GroupPunctuation {
+public interface GroupPunctuation {
 
     String getOpeningMark();
 

@@ -1,5 +1,7 @@
 package com.logme;
 
+import com.logme.punctuation.PunctuationMark;
+
 import java.util.Collection;
 
 class MessageBuilderImpl implements MessageBuilder {

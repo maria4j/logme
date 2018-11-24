@@ -1,6 +1,6 @@
-package com.logme;
+package com.logme.punctuation;
 
-class MultilineGroupPunctuation implements GroupPunctuation {
+public class MultilineGroupPunctuation implements GroupPunctuation {
 
     private static final int TAB_SIZE = 4;
 
@@ -9,7 +9,7 @@ class MultilineGroupPunctuation implements GroupPunctuation {
     private final String openingMark;
     private final String closingMark;
 
-    MultilineGroupPunctuation(int indentLength) {
+    public MultilineGroupPunctuation(int indentLength) {
         this.indentLength = indentLength;
         int reducedIndentLength = indentLength > 0 ? indentLength - 1 : 0;
 

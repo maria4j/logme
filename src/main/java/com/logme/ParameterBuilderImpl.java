@@ -1,5 +1,8 @@
 package com.logme;
 
+import com.logme.punctuation.GroupPunctuation;
+import com.logme.punctuation.ItemPunctuation;
+
 import java.util.Collection;
 
 /**

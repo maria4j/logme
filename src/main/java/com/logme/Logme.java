@@ -1,5 +1,9 @@
 package com.logme;
 
+import com.logme.punctuation.InlineItemPunctuation;
+import com.logme.punctuation.InlineObjectGroupPunctuation;
+import com.logme.punctuation.MultilineGroupPunctuation;
+
 public final class Logme {
 
     private Logme() {

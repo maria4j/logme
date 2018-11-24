@@ -1,5 +1,7 @@
 package com.logme;
 
+import com.logme.punctuation.GroupPunctuation;
+
 import java.util.Collection;
 
 public interface ParameterBuilder {

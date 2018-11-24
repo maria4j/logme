@@ -1,4 +1,4 @@
-package com.logme;
+package com.logme.punctuation;
 
 public interface ItemPunctuation {
 

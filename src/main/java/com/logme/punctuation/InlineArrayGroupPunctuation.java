@@ -1,6 +1,6 @@
-package com.logme;
+package com.logme.punctuation;
 
-class InlineArrayGroupPunctuation implements GroupPunctuation {
+public class InlineArrayGroupPunctuation implements GroupPunctuation {
 
     static final InlineArrayGroupPunctuation INSTANCE = new InlineArrayGroupPunctuation();
 

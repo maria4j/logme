@@ -1,6 +1,6 @@
-package com.logme;
+package com.logme.punctuation;
 
-enum PunctuationMark {
+public enum PunctuationMark {
 
     OPENING_BRACE("{"),
     CLOSING_BRACE("}"),
@@ -16,7 +16,7 @@ enum PunctuationMark {
         this.value = value;
     }
 
-    String value() {
+    public String value() {
         return value;
     }
 

@@ -1,8 +1,8 @@
-package com.logme;
+package com.logme.punctuation;
 
-class InlineItemPunctuation implements ItemPunctuation {
+public class InlineItemPunctuation implements ItemPunctuation {
 
-    static final InlineItemPunctuation INSTANCE = new InlineItemPunctuation();
+    public static final InlineItemPunctuation INSTANCE = new InlineItemPunctuation();
 
     private InlineItemPunctuation() {
     }

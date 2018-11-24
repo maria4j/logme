@@ -1,8 +1,8 @@
-package com.logme;
+package com.logme.punctuation;
 
-class InlineObjectGroupPunctuation implements GroupPunctuation {
+public class InlineObjectGroupPunctuation implements GroupPunctuation {
 
-    static final InlineObjectGroupPunctuation INSTANCE = new InlineObjectGroupPunctuation();
+    public static final InlineObjectGroupPunctuation INSTANCE = new InlineObjectGroupPunctuation();
 
     private InlineObjectGroupPunctuation() {
     }
