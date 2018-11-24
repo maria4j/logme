@@ -122,11 +122,6 @@ class MessageBuilderImpl implements MessageBuilder {
             return;
         }
 
-        // todo: remove additional spaces
-        if (mainBuilder.length() > 0) {
-            mainBuilder.append(PunctuationMark.SPACE.value());
-        }
-
         mainBuilder.append(currentParameterBuilder.toString());
         currentParameterBuilder = null;
     }
