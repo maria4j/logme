@@ -1,7 +1,8 @@
 package com.logme;
 
-import com.logme.punctuation.GroupPunctuation;
-import com.logme.punctuation.ItemPunctuation;
+import com.logme.punctuation.SquareIndentationStyle;
+import com.logme.punctuation.IndentationStyle;
+import com.logme.punctuation.PunctuationMark;
 
 import java.util.Collection;
 
@@ -11,13 +12,18 @@ import java.util.Collection;
  */
 class ParameterBuilderImpl implements ParameterBuilder {
 
-    private final StringBuilder stringBuilder = new StringBuilder();
-    private final GroupPunctuation groupPunctuation;
-    private final ItemPunctuation itemPunctuation;
+    /**
+     * A delimiter between name and value.
+     */
+    private static final String NAME_VALUE_DELIMITER = PunctuationMark.EQUAL_SIGN.value();
 
-    ParameterBuilderImpl(GroupPunctuation groupPunctuation, ItemPunctuation itemPunctuation) {
-        this.groupPunctuation = groupPunctuation;
-        this.itemPunctuation = itemPunctuation;
+    private final StringBuilder stringBuilder = new StringBuilder();
+    private final IndentationStyle indentationStyle;
+    private final IndentationStyle valueIndentationStyle;
+
+    ParameterBuilderImpl(IndentationStyle indentationStyle) {
+        this.indentationStyle = indentationStyle;
+        this.valueIndentationStyle = SquareIndentationStyle.INSTANCE;
     }
 
     @Override
@@ -26,63 +32,63 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     @Override
-    public GroupPunctuation getGroupPunctuation() {
-        return groupPunctuation;
+    public IndentationStyle getIndentationStyle() {
+        return indentationStyle;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, boolean value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, byte value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, char value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, double value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, float value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, int value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, long value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
     @Override
     public ParameterBuilder appendParameter(String name, Object value) {
         appendDelimiter();
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(value);
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(value);
         return this;
     }
 
@@ -90,21 +96,21 @@ class ParameterBuilderImpl implements ParameterBuilder {
     public <T> ParameterBuilder appendParameter(String name, T[] values) {
         appendDelimiter();
 
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(itemPunctuation.getValueGroupPunctuation().getOpeningMark());
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valueIndentationStyle.getOpeningMark());
 
         boolean empty = true;
         for (T value : values) {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(itemPunctuation.getValueGroupPunctuation().getDelimiter())
-                             .append(itemPunctuation.getValueGroupPunctuation().getIndent());
+                stringBuilder.append(valueIndentationStyle.getDelimiter())
+                             .append(valueIndentationStyle.getIndent());
             }
 
             stringBuilder.append(value.toString());
         }
 
-        stringBuilder.append(itemPunctuation.getValueGroupPunctuation().getClosingMark());
+        stringBuilder.append(valueIndentationStyle.getClosingMark());
 
         return this;
     }
@@ -113,34 +119,34 @@ class ParameterBuilderImpl implements ParameterBuilder {
     public <T> ParameterBuilder appendParameter(String name, Collection<T> values) {
         appendDelimiter();
 
-        stringBuilder.append(name).append(itemPunctuation.getKeyValueDelimiter()).append(itemPunctuation.getValueGroupPunctuation().getOpeningMark());
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valueIndentationStyle.getOpeningMark());
 
         boolean empty = true;
         for (Object value : values) {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(itemPunctuation.getValueGroupPunctuation().getDelimiter())
-                             .append(itemPunctuation.getValueGroupPunctuation().getIndent());
+                stringBuilder.append(valueIndentationStyle.getDelimiter())
+                             .append(valueIndentationStyle.getIndent());
             }
 
             stringBuilder.append(value.toString());
         }
 
-        stringBuilder.append(itemPunctuation.getValueGroupPunctuation().getClosingMark());
+        stringBuilder.append(valueIndentationStyle.getClosingMark());
 
         return this;
     }
 
     private void appendDelimiter() {
         if (hasParameters()) {
-            stringBuilder.append(groupPunctuation.getDelimiter()).append(groupPunctuation.getIndent());
+            stringBuilder.append(indentationStyle.getDelimiter()).append(indentationStyle.getIndent());
         }
     }
 
     @Override
     public String toString() {
-        return groupPunctuation.getOpeningMark() + stringBuilder.toString() + groupPunctuation.getClosingMark();
+        return indentationStyle.getOpeningMark() + stringBuilder.toString() + indentationStyle.getClosingMark();
     }
 
 }

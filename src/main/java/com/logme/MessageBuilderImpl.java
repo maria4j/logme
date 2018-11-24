@@ -104,9 +104,9 @@ class MessageBuilderImpl implements MessageBuilder {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (id != null) {
-            stringBuilder.append(PunctuationMark.OPENING_BRACKET.value())
+            stringBuilder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
                          .append(id)
-                         .append(PunctuationMark.CLOSING_BRACKET.value())
+                         .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value())
                          .append(PunctuationMark.SPACE.value());
         }
 

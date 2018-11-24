@@ -1,12 +1,12 @@
 package com.logme;
 
-import com.logme.punctuation.GroupPunctuation;
+import com.logme.punctuation.IndentationStyle;
 
 import java.util.Collection;
 
 public interface ParameterBuilder {
 
-    GroupPunctuation getGroupPunctuation();
+    IndentationStyle getIndentationStyle();
 
     boolean hasParameters();
 

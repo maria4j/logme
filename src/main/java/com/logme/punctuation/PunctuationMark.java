@@ -1,11 +1,14 @@
 package com.logme.punctuation;
 
+/**
+ * The {@code PunctuationMark} class includes all marks that are used to punctuate in Logme messages.
+ */
 public enum PunctuationMark {
 
-    OPENING_BRACE("{"),
-    CLOSING_BRACE("}"),
-    OPENING_BRACKET("["),
-    CLOSING_BRACKET("]"),
+    OPENING_CURLY_BRACKET("{"),
+    CLOSING_CURLY_BRACKET("}"),
+    OPENING_SQUARE_BRACKET("["),
+    CLOSING_SQUARE_BRACKET("]"),
     COMMA(","),
     EQUAL_SIGN("="),
     SPACE(" ");
