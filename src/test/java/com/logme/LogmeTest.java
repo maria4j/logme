@@ -165,15 +165,15 @@ class LogmeTest {
 
         String eol = System.lineSeparator();
         Assertions.assertEquals("Something happened {" + eol +
-                "    type=pdf, " + eol +
-                "    path=C:/doc/1.pdf, " + eol +
+                "    type=pdf," + eol +
+                "    path=C:/doc/1.pdf," + eol +
                 "    files=[{" + eol +
-                "        type=pdf, " + eol +
+                "        type=pdf," + eol +
                 "        path=C:/doc/1.pdf" + eol +
                 "    }, {" + eol +
-                "        type=txt, " + eol +
+                "        type=txt," + eol +
                 "        path=C:/doc/2.txt" + eol +
-                "    }], " + eol +
+                "    }]," + eol +
                 "    files=[{type=pdf, path=C:/doc/1.pdf}, {type=txt, path=C:/doc/2.txt}]" + eol +
                 "}", actualMessage);
     }

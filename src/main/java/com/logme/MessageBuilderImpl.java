@@ -1,5 +1,7 @@
 package com.logme;
 
+import com.logme.punctuation.PunctuationMark;
+
 import java.util.Collection;
 
 class MessageBuilderImpl implements MessageBuilder {
@@ -80,11 +82,6 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
-    public int getParametersIndent() {
-        return parameterBuilder.getIndent();
-    }
-
-    @Override
     public MessageBuilder appendParameter(String name, Object value) {
         parameterBuilder.appendParameter(name, value);
         return this;
@@ -107,13 +104,16 @@ class MessageBuilderImpl implements MessageBuilder {
         StringBuilder stringBuilder = new StringBuilder();
 
         if (id != null) {
-            stringBuilder.append("[").append(id).append("] ");
+            stringBuilder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
+                         .append(id)
+                         .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value())
+                         .append(PunctuationMark.SPACE.value());
         }
 
         stringBuilder.append(textBuilder);
 
         if (hasParameters()) {
-            stringBuilder.append(" ").append(parameterBuilder);
+            stringBuilder.append(PunctuationMark.SPACE.value()).append(parameterBuilder);
         }
 
         return stringBuilder.toString();

@@ -4,8 +4,6 @@ import java.util.Collection;
 
 public interface MessageBuilder {
 
-    int getParametersIndent();
-
     // todo: delete when changed api to flow builder
     boolean hasParameters();
 
