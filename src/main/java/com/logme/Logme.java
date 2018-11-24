@@ -1,6 +1,5 @@
 package com.logme;
 
-import com.logme.punctuation.CurlyIndentationStyle;
 import com.logme.punctuation.OtbsIndentationStyle;
 
 public final class Logme {
@@ -8,47 +7,44 @@ public final class Logme {
     private Logme() {
     }
 
-    // TODO: default inline
     public static MessageBuilder newMessage() {
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(CurlyIndentationStyle.INSTANCE);
-        return new MessageBuilderImpl(parameterBuilder);
+        return new MessageBuilderImpl(ParameterBuilderFactoryImpl.DEFAULT);
     }
 
     public static MessageBuilder newMessage(String text) {
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(CurlyIndentationStyle.INSTANCE);
-        return new MessageBuilderImpl(text, parameterBuilder);
+        return new MessageBuilderImpl(text, ParameterBuilderFactoryImpl.DEFAULT);
     }
 
     public static MessageBuilder newMessage(int indent) {
         final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(otbsStyle);
-        return new MessageBuilderImpl(parameterBuilder);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+        return new MessageBuilderImpl(parameterBuilderFactory);
     }
 
     public static MessageBuilder newMessage(String text, int indent) {
         final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(otbsStyle);
-        return new MessageBuilderImpl(text, parameterBuilder);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+        return new MessageBuilderImpl(text, parameterBuilderFactory);
     }
 
     public static MessageBuilder newMessage(String id, String text) {
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(CurlyIndentationStyle.INSTANCE);
-        return new MessageBuilderImpl(id, text, parameterBuilder);
+        return new MessageBuilderImpl(id, text, ParameterBuilderFactoryImpl.DEFAULT);
     }
 
     public static MessageBuilder newMessage(String id, String text, int indent) {
         final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
-        final ParameterBuilder parameterBuilder = new ParameterBuilderImpl(otbsStyle);
-        return new MessageBuilderImpl(id, text, parameterBuilder);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+        return new MessageBuilderImpl(id, text, parameterBuilderFactory);
     }
 
     public static ParameterBuilder newParameters() {
-        return new ParameterBuilderImpl(CurlyIndentationStyle.INSTANCE);
+        return ParameterBuilderFactoryImpl.DEFAULT.newParameterBuilder();
     }
 
     public static ParameterBuilder newParameters(int indent) {
         final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
-        return new ParameterBuilderImpl(otbsStyle);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+        return parameterBuilderFactory.newParameterBuilder();
     }
 
 }

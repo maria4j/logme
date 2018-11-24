@@ -1,5 +1,6 @@
 package com.logme;
 
+import com.logme.punctuation.CurlyIndentationStyle;
 import com.logme.punctuation.SquareIndentationStyle;
 import com.logme.punctuation.IndentationStyle;
 import com.logme.punctuation.PunctuationMark;
@@ -16,19 +17,21 @@ class ParameterBuilderImpl implements ParameterBuilder {
      * A delimiter between name and value.
      */
     private static final String NAME_VALUE_DELIMITER = PunctuationMark.EQUAL_SIGN.value();
+    private static final IndentationStyle DEFAULT_INDENTATION_STYLE = CurlyIndentationStyle.INSTANCE;
+    private static final IndentationStyle DEFAULT_VALUE_INDENTATION_STYLE = SquareIndentationStyle.INSTANCE;
 
     private final StringBuilder stringBuilder = new StringBuilder();
     private final IndentationStyle indentationStyle;
     private final IndentationStyle valueIndentationStyle;
 
-    ParameterBuilderImpl(IndentationStyle indentationStyle) {
-        this.indentationStyle = indentationStyle;
-        this.valueIndentationStyle = SquareIndentationStyle.INSTANCE;
+    ParameterBuilderImpl() {
+        this.indentationStyle = DEFAULT_INDENTATION_STYLE;
+        this.valueIndentationStyle = DEFAULT_VALUE_INDENTATION_STYLE;
     }
 
-    @Override
-    public boolean hasParameters() {
-        return stringBuilder.length() > 0;
+    ParameterBuilderImpl(IndentationStyle indentationStyle) {
+        this.indentationStyle = indentationStyle;
+        this.valueIndentationStyle = DEFAULT_VALUE_INDENTATION_STYLE;
     }
 
     @Override
@@ -103,8 +106,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(valueIndentationStyle.getDelimiter())
-                             .append(valueIndentationStyle.getIndent());
+                stringBuilder.append(valueIndentationStyle.getDelimiter()).append(valueIndentationStyle.getIndent());
             }
 
             stringBuilder.append(value.toString());
@@ -126,8 +128,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(valueIndentationStyle.getDelimiter())
-                             .append(valueIndentationStyle.getIndent());
+                stringBuilder.append(valueIndentationStyle.getDelimiter()).append(valueIndentationStyle.getIndent());
             }
 
             stringBuilder.append(value.toString());
@@ -139,7 +140,7 @@ class ParameterBuilderImpl implements ParameterBuilder {
     }
 
     private void appendDelimiter() {
-        if (hasParameters()) {
+        if (stringBuilder.length() > 0) {
             stringBuilder.append(indentationStyle.getDelimiter()).append(indentationStyle.getIndent());
         }
     }

@@ -7,96 +7,127 @@ import java.util.Collection;
 class MessageBuilderImpl implements MessageBuilder {
 
     private final String id;
-    private final StringBuilder textBuilder;
-    private final ParameterBuilder parameterBuilder;
+    private final StringBuilder mainBuilder;
+    private final ParameterBuilderFactory parameterBuilderFactory;
+    private ParameterBuilder currentParameterBuilder;
 
-    MessageBuilderImpl(ParameterBuilder parameterBuilder) {
+    MessageBuilderImpl(ParameterBuilderFactory parameterBuilderFactory) {
         this.id = null;
-        this.textBuilder = new StringBuilder();
-        this.parameterBuilder = parameterBuilder;
+        this.mainBuilder = new StringBuilder();
+        this.parameterBuilderFactory = parameterBuilderFactory;
+        this.currentParameterBuilder = null;
     }
 
-    MessageBuilderImpl(String text, ParameterBuilder parameterBuilder) {
+    MessageBuilderImpl(String text, ParameterBuilderFactory parameterBuilderFactory) {
         this.id = null;
-        this.textBuilder = new StringBuilder(text);
-        this.parameterBuilder = parameterBuilder;
+        this.mainBuilder = new StringBuilder(text);
+        this.parameterBuilderFactory = parameterBuilderFactory;
+        this.currentParameterBuilder = null;
     }
 
-    MessageBuilderImpl(String id, String text, ParameterBuilder parameterBuilder) {
+    MessageBuilderImpl(String id, String text, ParameterBuilderFactory parameterBuilderFactory) {
         this.id = id;
-        this.textBuilder = new StringBuilder(text);
-        this.parameterBuilder = parameterBuilder;
+        this.mainBuilder = new StringBuilder(text);
+        this.parameterBuilderFactory = parameterBuilderFactory;
+        this.currentParameterBuilder = null;
     }
 
     @Override
     public MessageBuilder appendText(String text) {
-        textBuilder.append(text);
+        flushParameters();
+
+        mainBuilder.append(text);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, boolean value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, byte value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, char value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, double value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, float value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, int value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public MessageBuilder appendParameter(String name, long value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
-    public boolean hasParameters() {
-        return parameterBuilder.hasParameters();
-    }
-
-    @Override
     public MessageBuilder appendParameter(String name, Object value) {
-        parameterBuilder.appendParameter(name, value);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, value);
         return this;
     }
 
     @Override
     public <T> MessageBuilder appendParameter(String name, T[] values) {
-        parameterBuilder.appendParameter(name, values);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, values);
         return this;
     }
 
     @Override
     public <T> MessageBuilder appendParameter(String name, Collection<T> values) {
-        parameterBuilder.appendParameter(name, values);
+        initParameters();
+        currentParameterBuilder.appendParameter(name, values);
         return this;
+    }
+
+    private void initParameters() {
+        if (currentParameterBuilder == null) {
+            currentParameterBuilder = parameterBuilderFactory.newParameterBuilder();
+        }
+    }
+
+    private void flushParameters() {
+        if (currentParameterBuilder == null) {
+            return;
+        }
+
+        // todo: remove additional spaces
+        if (mainBuilder.length() > 0) {
+            mainBuilder.append(PunctuationMark.SPACE.value());
+        }
+
+        mainBuilder.append(currentParameterBuilder.toString());
+        currentParameterBuilder = null;
     }
 
     @Override
@@ -110,11 +141,9 @@ class MessageBuilderImpl implements MessageBuilder {
                          .append(PunctuationMark.SPACE.value());
         }
 
-        stringBuilder.append(textBuilder);
+        flushParameters();
 
-        if (hasParameters()) {
-            stringBuilder.append(PunctuationMark.SPACE.value()).append(parameterBuilder);
-        }
+        stringBuilder.append(mainBuilder);
 
         return stringBuilder.toString();
     }
