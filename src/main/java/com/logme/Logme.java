@@ -27,16 +27,6 @@ public final class Logme {
         return new MessageBuilderImpl(text, parameterBuilderFactory);
     }
 
-    public static MessageBuilder newMessage(String id, String text) {
-        return new MessageBuilderImpl(id, text, ParameterBuilderFactoryImpl.DEFAULT);
-    }
-
-    public static MessageBuilder newMessage(String id, String text, int indent) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indent);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
-        return new MessageBuilderImpl(id, text, parameterBuilderFactory);
-    }
-
     public static ParameterBuilder newParameters() {
         return ParameterBuilderFactoryImpl.DEFAULT.newParameterBuilder();
     }

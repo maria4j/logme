@@ -27,9 +27,22 @@ class LogmeTest {
     }
 
     @Test
-    void newMessage_withIdAndText_appended() {
-        String actualMessage = Logme.newMessage("SMTH-HPND", "Something happened").toString();
+    void newMessage_withMarkerAndText_appended() {
+        String actualMessage = Logme.newMessage()
+                .appendMarker("SMTH-HPND")
+                .appendText(" Something happened")
+                .toString();
         Assertions.assertEquals("[SMTH-HPND] Something happened", actualMessage);
+    }
+
+    @Test
+    void newMessage_withTwoMarkersAndText_appended() {
+        String actualMessage = Logme.newMessage()
+                .appendMarker("SMTH-HPND")
+                .appendMarker("SCND-MRKR")
+                .appendText(" Something happened")
+                .toString();
+        Assertions.assertEquals("[SMTH-HPND][SCND-MRKR] Something happened", actualMessage);
     }
 
     @Test
