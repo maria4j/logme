@@ -47,7 +47,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withTextAndTwoParameters_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
                 .toString();
@@ -58,7 +58,7 @@ class LogmeTest {
     @Test
     void newMessage_withTextAppendedAfterNewMessage_textAppendedToOriginal() {
         String actualMessage = Logme.newMessage("Something happened")
-                .appendText(" at this moment. Let's fix it")
+                .appendText(" at this moment. Let's fix it ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
                 .toString();
@@ -80,7 +80,7 @@ class LogmeTest {
     // newMessage_itShouldBuildMessageRegardlessOfMethodCallOrder()
     @Test
     void newMessage_withTextAppendedAfterParameters_textAppendedToOriginal() {
-        String actualMessage = Logme.newMessage("Something happened at this moment")
+        String actualMessage = Logme.newMessage("Something happened at this moment ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
                 .appendText(". Let's fix it")
@@ -91,10 +91,10 @@ class LogmeTest {
 
     @Test
     void newMessage_withMultipleTextAndParametersParameters_textAppendedToOriginal() {
-        String actualMessage = Logme.newMessage("Something happened at this moment")
+        String actualMessage = Logme.newMessage("Something happened at this moment ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("type", "plain")
-                .appendText(". Let's fix it, more details:")
+                .appendText(". Let's fix it, more details: ")
                 .appendParameter("file1", "C:/bin/cfg1.xml")
                 .appendParameter("file2", "C:/bin/cfg2.xml")
                 .appendParameter("file3", "C:/bin/cfg3.xml")
@@ -106,7 +106,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withTextAndTwoParametersOneOfWhichIsStringArray_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("numbers", new String[] {"1", "2", "3"})
                 .toString();
@@ -116,7 +116,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withTextAndTwoParametersOneOfWhichIsIntegerArray_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("numbers", new Integer[] {1, 2, 3})
                 .toString();
@@ -126,7 +126,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withValueAsStringCollection_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("numbers", Arrays.asList("1", "2", "3"))
                 .toString();
@@ -137,7 +137,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithOneItem_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Collections.singletonList(
                         Logme.newParameters()
@@ -150,7 +150,7 @@ class LogmeTest {
 
     @Test
     void newMessage_withTextAndTwoParametersOneOfWhichIsParametersArrayWithTwoItems_appended() {
-        String actualMessage = Logme.newMessage("Something happened")
+        String actualMessage = Logme.newMessage("Something happened ")
                 .appendParameter("id", "36f6f78hje")
                 .appendParameter("files", Arrays.asList(
                         Logme.newParameters()
@@ -166,7 +166,7 @@ class LogmeTest {
 
     @Test
     void newMessage_multiline_formatted() {
-        String actualMessage = Logme.newMessage("Something happened", 1)
+        String actualMessage = Logme.newMessage("Something happened ", 1)
                 .appendParameter("type", "pdf")
                 .appendParameter("path", "C:/doc/1.pdf")
                 .appendParameter("files",
