@@ -4,9 +4,12 @@ import java.util.Collection;
 
 public interface ParameterBuilder {
 
-    int getIndent();
+    GroupPunctuation getGroupPunctuation();
 
     boolean hasParameters();
+
+    // todo: defaultValue appendParameter("name", "value", "<не задано>") -> или условие обработки (функция?) -> Supplier
+    // todo: supplier пока что не нужен, пояснить, что multilineSeparator не страшен, т.к. основная часть сообщений в логах - однострочные
 
     ParameterBuilder appendParameter(String name, boolean value);
 

@@ -80,11 +80,6 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
-    public int getParametersIndent() {
-        return parameterBuilder.getIndent();
-    }
-
-    @Override
     public MessageBuilder appendParameter(String name, Object value) {
         parameterBuilder.appendParameter(name, value);
         return this;
