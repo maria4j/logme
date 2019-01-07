@@ -5,11 +5,11 @@ package com.logme.punctuation;
  * <p>
  * Example: {@code {a, b, c}}
  */
-public class CurlyIndentationStyle implements IndentationStyle {
+public class CurlyGroupPunctuation implements GroupPunctuation {
 
-    public static final CurlyIndentationStyle INSTANCE = new CurlyIndentationStyle();
+    public static final CurlyGroupPunctuation INSTANCE = new CurlyGroupPunctuation();
 
-    private CurlyIndentationStyle() {
+    private CurlyGroupPunctuation() {
     }
 
     @Override
@@ -17,6 +17,7 @@ public class CurlyIndentationStyle implements IndentationStyle {
         return PunctuationMark.OPENING_CURLY_BRACKET.value();
     }
 
+    // todo: design notes: delimiter and indent are separated because it allows to create one multiline wrapper instead of many for each group punctuation
     @Override
     public String getDelimiter() {
         return PunctuationMark.COMMA.value();

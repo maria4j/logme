@@ -1,13 +1,13 @@
 package com.logme.punctuation;
 
 /**
- * Describes indentation style for a group of items to convey text structure.
+ * Describes punctuation rules for a group of items to convey text structure.
  *
- * @see SquareIndentationStyle
- * @see CurlyIndentationStyle
- * @see OtbsIndentationStyle
+ * @see SquareGroupPunctuation
+ * @see CurlyGroupPunctuation
+ * @see MultilineGroupPunctuation
  */
-public interface IndentationStyle {
+public interface GroupPunctuation {
 
     /**
      * Returns a mark that should be used for opening a group.

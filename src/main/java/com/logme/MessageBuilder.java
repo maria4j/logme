@@ -28,6 +28,10 @@ public interface MessageBuilder {
 
     <T> MessageBuilder appendParameter(String name, T[] values);
 
+    <T> MessageBuilder appendMultilineParameter(String name, T[] values);
+
     <T> MessageBuilder appendParameter(String name, Collection<T> values);
+
+    <T> MessageBuilder appendMultilineParameter(String name, Collection<T> values);
 
 }

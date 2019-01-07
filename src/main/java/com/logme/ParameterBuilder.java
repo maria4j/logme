@@ -1,12 +1,8 @@
 package com.logme;
 
-import com.logme.punctuation.IndentationStyle;
-
 import java.util.Collection;
 
 public interface ParameterBuilder {
-
-    IndentationStyle getIndentationStyle();
 
     ParameterBuilder appendParameter(String name, boolean value);
 
@@ -28,6 +24,10 @@ public interface ParameterBuilder {
 
     <T> ParameterBuilder appendParameter(String name, T[] values);
 
+    <T> ParameterBuilder appendMultilineParameter(String name, T[] values);
+
     <T> ParameterBuilder appendParameter(String name, Collection<T> values);
+
+    <T> ParameterBuilder appendMultilineParameter(String name, Collection<T> values);
 
 }

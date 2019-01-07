@@ -1,6 +1,7 @@
 package com.logme;
 
-import com.logme.punctuation.OtbsIndentationStyle;
+import com.logme.punctuation.CurlyGroupPunctuation;
+import com.logme.punctuation.MultilineGroupPunctuation;
 
 public final class Logme {
 
@@ -15,15 +16,16 @@ public final class Logme {
         return new MessageBuilderImpl(text, ParameterBuilderFactoryImpl.DEFAULT);
     }
 
-    public static MessageBuilder newMessage(int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+    // todo: without indent level
+    public static MessageBuilder newMultilineMessage(int indentLevel) {
+        final MultilineGroupPunctuation multilineStyle = new MultilineGroupPunctuation(indentLevel, CurlyGroupPunctuation.INSTANCE);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(multilineStyle);
         return new MessageBuilderImpl(parameterBuilderFactory);
     }
 
-    public static MessageBuilder newMessage(String text, int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+    public static MessageBuilder newMultilineMessage(String text, int indentLevel) {
+        final MultilineGroupPunctuation multilineStyle = new MultilineGroupPunctuation(indentLevel, CurlyGroupPunctuation.INSTANCE);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(multilineStyle);
         return new MessageBuilderImpl(text, parameterBuilderFactory);
     }
 
@@ -31,9 +33,9 @@ public final class Logme {
         return ParameterBuilderFactoryImpl.DEFAULT.newParameterBuilder();
     }
 
-    public static ParameterBuilder newParameters(int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
+    public static ParameterBuilder newMultilineParameters(int indentLevel) {
+        final MultilineGroupPunctuation multilineStyle = new MultilineGroupPunctuation(indentLevel, CurlyGroupPunctuation.INSTANCE);
+        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(multilineStyle);
         return parameterBuilderFactory.newParameterBuilder();
     }
 

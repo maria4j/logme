@@ -5,11 +5,11 @@ package com.logme.punctuation;
  * <p>
  * Example: {@code [a, b, c]}
  */
-public class SquareIndentationStyle implements IndentationStyle {
+public class SquareGroupPunctuation implements GroupPunctuation {
 
-    public static final SquareIndentationStyle INSTANCE = new SquareIndentationStyle();
+    public static final SquareGroupPunctuation INSTANCE = new SquareGroupPunctuation();
 
-    private SquareIndentationStyle() {
+    private SquareGroupPunctuation() {
     }
 
     @Override

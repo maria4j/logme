@@ -25,18 +25,15 @@ class MessageBuilderImpl implements MessageBuilder {
     @Override
     public MessageBuilder appendMarker(String marker) {
         flushParameters();
-
         mainBuilder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
                    .append(marker)
                    .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value());
-
         return this;
     }
 
     @Override
     public MessageBuilder appendText(String text) {
         flushParameters();
-
         mainBuilder.append(text);
         return this;
     }
@@ -112,9 +109,23 @@ class MessageBuilderImpl implements MessageBuilder {
     }
 
     @Override
+    public <T> MessageBuilder appendMultilineParameter(String name, T[] values) {
+        initParameters();
+        currentParameterBuilder.appendMultilineParameter(name, values);
+        return this;
+    }
+
+    @Override
     public <T> MessageBuilder appendParameter(String name, Collection<T> values) {
         initParameters();
         currentParameterBuilder.appendParameter(name, values);
+        return this;
+    }
+
+    @Override
+    public <T> MessageBuilder appendMultilineParameter(String name, Collection<T> values) {
+        initParameters();
+        currentParameterBuilder.appendMultilineParameter(name, values);
         return this;
     }
 

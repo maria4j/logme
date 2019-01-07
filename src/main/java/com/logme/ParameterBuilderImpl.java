@@ -1,9 +1,6 @@
 package com.logme;
 
-import com.logme.punctuation.CurlyIndentationStyle;
-import com.logme.punctuation.SquareIndentationStyle;
-import com.logme.punctuation.IndentationStyle;
-import com.logme.punctuation.PunctuationMark;
+import com.logme.punctuation.*;
 
 import java.util.Collection;
 
@@ -17,26 +14,28 @@ class ParameterBuilderImpl implements ParameterBuilder {
      * A delimiter between name and value.
      */
     private static final String NAME_VALUE_DELIMITER = PunctuationMark.EQUAL_SIGN.value();
-    private static final IndentationStyle DEFAULT_INDENTATION_STYLE = CurlyIndentationStyle.INSTANCE;
-    private static final IndentationStyle DEFAULT_VALUE_INDENTATION_STYLE = SquareIndentationStyle.INSTANCE;
+    private static final GroupPunctuation DEFAULT_PUNCTUATION = CurlyGroupPunctuation.INSTANCE;
+    private static final GroupPunctuation DEFAULT_VALUE_PUNCTUATION = SquareGroupPunctuation.INSTANCE;
 
     private final StringBuilder stringBuilder = new StringBuilder();
-    private final IndentationStyle indentationStyle;
-    private final IndentationStyle valueIndentationStyle;
+    private final GroupPunctuation punctuation;
+    private final GroupPunctuation valuePunctuation;
+    private final MultilineGroupPunctuation multilineValuePunctuation;
 
     ParameterBuilderImpl() {
-        this.indentationStyle = DEFAULT_INDENTATION_STYLE;
-        this.valueIndentationStyle = DEFAULT_VALUE_INDENTATION_STYLE;
+        this(DEFAULT_PUNCTUATION);
     }
 
-    ParameterBuilderImpl(IndentationStyle indentationStyle) {
-        this.indentationStyle = indentationStyle;
-        this.valueIndentationStyle = DEFAULT_VALUE_INDENTATION_STYLE;
-    }
+    // todo: pull valuePunctuation up
+    ParameterBuilderImpl(GroupPunctuation punctuation) {
+        this.punctuation = punctuation;
+        this.valuePunctuation = DEFAULT_VALUE_PUNCTUATION;
 
-    @Override
-    public IndentationStyle getIndentationStyle() {
-        return indentationStyle;
+        int baseIndent = 0;
+        if (punctuation instanceof MultilineGroupPunctuation) {
+            baseIndent = ((MultilineGroupPunctuation) punctuation).getIndentLevel();
+        }
+        this.multilineValuePunctuation = new MultilineGroupPunctuation(baseIndent + 1, valuePunctuation);
     }
 
     @Override
@@ -105,57 +104,86 @@ class ParameterBuilderImpl implements ParameterBuilder {
 
     @Override
     public <T> ParameterBuilder appendParameter(String name, T[] values) {
+        return appendParameter(name, values, valuePunctuation);
+    }
+
+    @Override
+    public <T> ParameterBuilder appendMultilineParameter(String name, T[] values) {
+        return appendParameter(name, values, multilineValuePunctuation);
+    }
+
+    @Override
+    public <T> ParameterBuilder appendParameter(String name, Collection<T> values) {
+        return appendParameter(name, values, valuePunctuation);
+    }
+
+    @Override
+    public <T> ParameterBuilder appendMultilineParameter(String name, Collection<T> values) {
+        return appendParameter(name, values, multilineValuePunctuation);
+    }
+
+    private <T> ParameterBuilder appendParameter(String name, T[] values, GroupPunctuation valuePunctuation) {
         appendDelimiter();
 
-        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valueIndentationStyle.getOpeningMark());
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valuePunctuation.getOpeningMark());
 
         boolean empty = true;
         for (T value : values) {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(valueIndentationStyle.getDelimiter()).append(valueIndentationStyle.getIndent());
+                stringBuilder.append(valuePunctuation.getDelimiter()).append(valuePunctuation.getIndent());
             }
 
-            stringBuilder.append(value.toString());
+            // todo: move to multiline and check in hierarchy
+            String result = value.toString();
+            if (valuePunctuation == multilineValuePunctuation && value instanceof ParameterBuilder) {
+                result = result.replace(System.lineSeparator(), System.lineSeparator() + "    ");
+            }
+            stringBuilder.append(result);
         }
 
-        stringBuilder.append(valueIndentationStyle.getClosingMark());
+        stringBuilder.append(valuePunctuation.getClosingMark());
 
         return this;
+
     }
 
-    @Override
-    public <T> ParameterBuilder appendParameter(String name, Collection<T> values) {
+    private <T> ParameterBuilder appendParameter(String name, Collection<T> values, GroupPunctuation valuePunctuation) {
         appendDelimiter();
 
-        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valueIndentationStyle.getOpeningMark());
+        stringBuilder.append(name).append(NAME_VALUE_DELIMITER).append(valuePunctuation.getOpeningMark());
 
         boolean empty = true;
         for (Object value : values) {
             if (empty) {
                 empty = false;
             } else {
-                stringBuilder.append(valueIndentationStyle.getDelimiter()).append(valueIndentationStyle.getIndent());
+                stringBuilder.append(valuePunctuation.getDelimiter()).append(valuePunctuation.getIndent());
             }
 
-            stringBuilder.append(value.toString());
+            // todo: move to multiline and check in hierarchy
+            String result = value.toString();
+            if (valuePunctuation == multilineValuePunctuation && value instanceof ParameterBuilder) {
+                result = result.replace(System.lineSeparator(), System.lineSeparator() + "    ");
+            }
+            stringBuilder.append(result);
         }
 
-        stringBuilder.append(valueIndentationStyle.getClosingMark());
+        stringBuilder.append(valuePunctuation.getClosingMark());
 
         return this;
     }
 
     private void appendDelimiter() {
         if (stringBuilder.length() > 0) {
-            stringBuilder.append(indentationStyle.getDelimiter()).append(indentationStyle.getIndent());
+            stringBuilder.append(punctuation.getDelimiter()).append(punctuation.getIndent());
         }
     }
 
     @Override
     public String toString() {
-        return indentationStyle.getOpeningMark() + stringBuilder.toString() + indentationStyle.getClosingMark();
+        return punctuation.getOpeningMark() + stringBuilder.toString() + punctuation.getClosingMark();
     }
 
 }

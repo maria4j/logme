@@ -1,33 +1,28 @@
 package com.logme;
 
-import com.logme.punctuation.IndentationStyle;
+import com.logme.punctuation.GroupPunctuation;
 
 class ParameterBuilderFactoryImpl implements ParameterBuilderFactory {
 
     static final ParameterBuilderFactory DEFAULT = new ParameterBuilderFactoryImpl();
 
-    private final IndentationStyle indentationStyle;
+    private final GroupPunctuation punctuation;
 
     private ParameterBuilderFactoryImpl() {
-        this.indentationStyle = null;
+        this.punctuation = null;
     }
 
-    ParameterBuilderFactoryImpl(IndentationStyle indentationStyle) {
-        this.indentationStyle = indentationStyle;
-    }
-
-    @Override
-    public IndentationStyle getIndentationStyle() {
-        return indentationStyle;
+    ParameterBuilderFactoryImpl(GroupPunctuation punctuation) {
+        this.punctuation = punctuation;
     }
 
     @Override
     public ParameterBuilder newParameterBuilder() {
-        if (indentationStyle == null) {
+        if (punctuation == null) {
             return new ParameterBuilderImpl();
         }
 
-        return new ParameterBuilderImpl(indentationStyle);
+        return new ParameterBuilderImpl(punctuation);
     }
 
 }
