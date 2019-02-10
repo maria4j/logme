@@ -7,27 +7,27 @@ class LogmeMessageTest {
 
     @Test
     void newMessage_default_emptyTextAppended() {
-        String actual = Logme.newMessage().toString();
+        String actual = Logme.message().toString();
         Assertions.assertEquals("", actual);
     }
 
     @Test
     void newMessage_withText_appended() {
-        String actual = Logme.newMessage("This is a test message built with Logme").toString();
+        String actual = Logme.message("This is a test message built with Logme").toString();
         Assertions.assertEquals("This is a test message built with Logme", actual);
     }
 
     @Test
     void buildMessage_withText_appended() {
-        String actual = Logme.newMessage().appendText("This is a test message built with Logme").toString();
+        String actual = Logme.message().append("This is a test message built with Logme").toString();
         Assertions.assertEquals("This is a test message built with Logme", actual);
     }
 
     @Test
     void buildMessage_withMarkerAndText_appended() {
-        String actual = Logme.newMessage()
-                .appendMarker("TEST-MSG")
-                .appendText(" This is a test message with a marker built with Logme")
+        String actual = Logme.message()
+                .appendTag("TEST-MSG")
+                .append(" This is a test message with a marker built with Logme")
                 .toString();
 
         Assertions.assertEquals(
@@ -38,10 +38,10 @@ class LogmeMessageTest {
 
     @Test
     void buildMessage_withTwoMarkersAndText_appended() {
-        String actual = Logme.newMessage()
-                .appendMarker("TEST-MSG-MRKR-1")
-                .appendMarker("TEST-MSG-MRKR-2")
-                .appendText(" This is a test message with two markers built with Logme")
+        String actual = Logme.message()
+                .appendTag("TEST-MSG-MRKR-1")
+                .appendTag("TEST-MSG-MRKR-2")
+                .append(" This is a test message with two markers built with Logme")
                 .toString();
 
         Assertions.assertEquals(
@@ -52,11 +52,13 @@ class LogmeMessageTest {
 
     @Test
     void buildMessage_withTwoTextsAndTwoParameters_appended() {
-        String actual = Logme.newMessage()
-                .appendText("This is a test message ")
-                .appendText("built with Logme ")
-                .appendParameter("appendTextInvocations", 2)
-                .appendParameter("indentation", "oneLine")
+        String actual = Logme.message()
+                .append("This is a test message ")
+                .append("built with Logme ")
+                .append(Logme.parameters()
+                        .append("appendTextInvocations", 2)
+                        .append("indentation", "oneLine")
+                )
                 .toString();
 
         Assertions.assertEquals(
@@ -79,11 +81,13 @@ class LogmeMessageTest {
      */
     @Test
     void buildMessage_withTextAppendedAfterParameters_appended() {
-        String actual = Logme.newMessage()
-                .appendText("This is a test message built with Logme ")
-                .appendParameter("appendTextInvocations", 2)
-                .appendParameter("indentation", "oneLine")
-                .appendText(". More details coming soon!")
+        String actual = Logme.message()
+                .append("This is a test message built with Logme ")
+                .append(Logme.parameters()
+                        .append("appendTextInvocations", 2)
+                        .append("indentation", "oneLine")
+                )
+                .append(". More details coming soon!")
                 .toString();
 
         Assertions.assertEquals(
@@ -95,15 +99,19 @@ class LogmeMessageTest {
 
     @Test
     void newMessage_withMixedTextAndParameters_appended() {
-        String actual = Logme.newMessage()
-                .appendText("This is a test message built with Logme ")
-                .appendParameter("appendTextInvocations", 1)
-                .appendParameter("indentation", "oneLine")
-                .appendText(". More details: ")
-                .appendParameter("file1", "C:/bin/cfg1.xml")
-                .appendParameter("file2", "C:/bin/cfg2.xml")
-                .appendParameter("file3", "C:/bin/cfg3.xml")
-                .appendText(" Good luck!")
+        String actual = Logme.message()
+                .append("This is a test message built with Logme ")
+                .append(Logme.parameters()
+                        .append("appendTextInvocations", 1)
+                        .append("indentation", "oneLine")
+                )
+                .append(". More details: ")
+                .append(Logme.parameters()
+                        .append("file1", "C:/bin/cfg1.xml")
+                        .append("file2", "C:/bin/cfg2.xml")
+                        .append("file3", "C:/bin/cfg3.xml")
+                )
+                .append(" Good luck!")
                 .toString();
 
         Assertions.assertEquals(
