@@ -13,12 +13,4 @@ public final class Logme {
         return new Message(text);
     }
 
-    public static Parameters parameters() {
-        return ParametersFactory.parameters();
-    }
-
-    public static Parameters multilineParameters(int indentLevel) {
-        return ParametersFactory.multilineParameters(indentLevel);
-    }
-
 }

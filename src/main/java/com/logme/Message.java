@@ -18,8 +18,8 @@ class Message {
 
     public Message appendTag(String value) {
         builder.append(PunctuationMark.OPENING_SQUARE_BRACKET.value())
-                .append(value)
-                .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value());
+               .append(value)
+               .append(PunctuationMark.CLOSING_SQUARE_BRACKET.value());
         return this;
     }
 
@@ -28,22 +28,17 @@ class Message {
         return this;
     }
 
-    public Message append(Parameters parameters) {
+    public Message appendParameters(Consumer<Parameters> consumer) {
+        Parameters parameters = new Parameters();
+        consumer.accept(parameters);
         builder.append(parameters.toString());
         return this;
     }
 
-    public Message append(Consumer<Parameters> parametersConsumer) {
-        Parameters parameters = ParametersFactory.parameters();
-        parametersConsumer.accept(parameters);
-        append(parameters);
-        return this;
-    }
-
-    public Message append(LogmeStyle style, Consumer<Parameters> parametersConsumer) {
-        Parameters parameters = ParametersFactory.parameters(style);
-        parametersConsumer.accept(parameters);
-        append(parameters);
+    public Message appendMultilineParameters(Consumer<MultilineParameters> consumer) {
+        MultilineParameters multilineParameters = new MultilineParameters();
+        consumer.accept(multilineParameters);
+        builder.append(multilineParameters.toString());
         return this;
     }
 
