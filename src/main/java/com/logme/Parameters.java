@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  * @author Maria
  * @since 02.08.2018
  */
-class Parameters {
+public class Parameters {
 
     /**
      * A delimiter between name and value.

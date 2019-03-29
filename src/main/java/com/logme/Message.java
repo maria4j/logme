@@ -4,7 +4,7 @@ import com.logme.punctuation.PunctuationMark;
 
 import java.util.function.Consumer;
 
-class Message {
+public class Message {
 
     private final StringBuilder builder;
 

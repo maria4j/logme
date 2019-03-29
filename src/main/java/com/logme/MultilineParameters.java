@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  * @author Maria
  * @since 02.08.2018
  */
-class MultilineParameters extends Parameters {
+public class MultilineParameters extends Parameters {
 
     private final MultilineGroupPunctuation multilineValuePunctuation;
 
