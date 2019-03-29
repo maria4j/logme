@@ -169,9 +169,6 @@ public class MultilineParameters extends Parameters {
     public MultilineParameters appendMultilineParameters(String name, Collection<Consumer<MultilineParameters>> valueConsumers, boolean multilineValue) {
         List<MultilineParameters> values = new ArrayList<>(valueConsumers.size());
         for (Consumer<MultilineParameters> valueConsumer : valueConsumers) {
-            // todo: fix cast
-            // todo: fix tricky logic
-            // todo: check in hierarchy
             int baseIndent = ((MultilineGroupPunctuation) getPunctuation()).getIndentLevel();
             if (multilineValue) {
                 baseIndent += 1;    
