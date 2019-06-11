@@ -1,40 +1,29 @@
 package com.logme;
 
-import com.logme.punctuation.OtbsIndentationStyle;
-
+/**
+ * An entry point of Logme.
+ * <p>
+ * Start creating Logme messages by using {@code message}-methods.
+ */
 public final class Logme {
 
     private Logme() {
     }
 
-    public static MessageBuilder newMessage() {
-        return new MessageBuilderImpl(ParameterBuilderFactoryImpl.DEFAULT);
+    /**
+     * Returns an empty message builder.
+     */
+    public static Message message() {
+        return new Message();
     }
 
-    public static MessageBuilder newMessage(String text) {
-        return new MessageBuilderImpl(text, ParameterBuilderFactoryImpl.DEFAULT);
-    }
-
-    public static MessageBuilder newMessage(int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
-        return new MessageBuilderImpl(parameterBuilderFactory);
-    }
-
-    public static MessageBuilder newMessage(String text, int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
-        return new MessageBuilderImpl(text, parameterBuilderFactory);
-    }
-
-    public static ParameterBuilder newParameters() {
-        return ParameterBuilderFactoryImpl.DEFAULT.newParameterBuilder();
-    }
-
-    public static ParameterBuilder newParameters(int indentLevel) {
-        final OtbsIndentationStyle otbsStyle = new OtbsIndentationStyle(indentLevel);
-        final ParameterBuilderFactory parameterBuilderFactory = new ParameterBuilderFactoryImpl(otbsStyle);
-        return parameterBuilderFactory.newParameterBuilder();
+    /**
+     * Returns a message builder initialized to the contents of the specified string.
+     * 
+     * @param text the initial contents of the message.
+     */
+    public static Message message(String text) {
+        return new Message(text);
     }
 
 }

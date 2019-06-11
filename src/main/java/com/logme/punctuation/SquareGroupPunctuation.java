@@ -1,15 +1,15 @@
 package com.logme.punctuation;
 
 /**
- * Describes indentation style for a single-line group of items enclosed in square brackets.
+ * Describes punctuation rule for a single-line group of items enclosed in square brackets.
  * <p>
  * Example: {@code [a, b, c]}
  */
-public class SquareIndentationStyle implements IndentationStyle {
+public class SquareGroupPunctuation implements GroupPunctuation {
 
-    public static final SquareIndentationStyle INSTANCE = new SquareIndentationStyle();
+    public static final SquareGroupPunctuation INSTANCE = new SquareGroupPunctuation();
 
-    private SquareIndentationStyle() {
+    private SquareGroupPunctuation() {
     }
 
     @Override

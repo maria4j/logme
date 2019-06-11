@@ -1,15 +1,15 @@
 package com.logme.punctuation;
 
 /**
- * Describes indentation style for a single-line group of items enclosed in curly brackets.
+ * Describes punctuation rule for a single-line group of items enclosed in curly brackets.
  * <p>
  * Example: {@code {a, b, c}}
  */
-public class CurlyIndentationStyle implements IndentationStyle {
+public class CurlyGroupPunctuation implements GroupPunctuation {
 
-    public static final CurlyIndentationStyle INSTANCE = new CurlyIndentationStyle();
+    public static final CurlyGroupPunctuation INSTANCE = new CurlyGroupPunctuation();
 
-    private CurlyIndentationStyle() {
+    private CurlyGroupPunctuation() {
     }
 
     @Override
