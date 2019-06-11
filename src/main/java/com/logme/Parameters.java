@@ -77,7 +77,6 @@ public class Parameters {
      *
      * @param punctuation the indentation style for each parameter.
      */
-    // todo: remove?
     protected Parameters(GroupPunctuation punctuation) {
         this.punctuation = punctuation;
         this.valuePunctuation = DEFAULT_VALUE_PUNCTUATION;
