@@ -7,21 +7,25 @@ import java.util.function.Consumer;
 /**
  * A message builder.
  * <p>
- * This class provides API similar to {@link StringBuilder}. Under cover it actually uses {@code StringBuilder} 
- * to build messages.
+ * This class provides API similar to {@link StringBuilder}. 
+ * Under cover it actually uses {@code StringBuilder} to build messages.
  * <p>
- * Every message are usually contains some text and parameters. The principal operation on the {@code Message} is the
+ * Every message are usually contains some text and parameters. 
+ * The principal operation on the {@code Message} is the 
  * {@code append} method, which appends the specified text to the message.
  * <p>
- * There are two types of parameters: single-line and multiline. The first type is the most common and 
- * the most lightweight. It can be appended by the {@code appendParameters} method. If parameters don't fit in 
- * one line or are hardly readable they can be represented in a more structured way, where every parameter will be 
- * placed on a new line. Multiline parameters can be appended to the message by the {@code appendMultilineParameters}
- * method.
+ * There are two types of parameters: single-line and multiline. 
+ * The first type is the most common and the most lightweight. 
+ * It can be appended by the {@code appendParameters} method. 
+ * If parameters don't fit in one line or are hardly readable 
+ * they can be represented in a more structured way, where every parameter 
+ * will be placed on a new line. Multiline parameters can be appended to 
+ * the message by the {@code appendMultilineParameters} method.
  * <p>
- * Sometimes it's useful to tag messages belongs to the one context, e.g. logged by one thread. For these purposes use 
- * the {@code appendTag} method. Although every tag is enclosed with brackets it is recommended to append them at 
- * the beginning of the message building. 
+ * Sometimes it's useful to tag messages belongs to the one context, e.g. 
+ * logged by one thread. For these purposes use the {@code appendTag} method. 
+ * Although every tag is enclosed with brackets it is recommended to 
+ * append them at the beginning of the message building. 
  * 
  * @see Parameters
  * @see MultilineParameters

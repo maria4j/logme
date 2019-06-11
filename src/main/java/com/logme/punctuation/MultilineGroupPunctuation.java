@@ -1,14 +1,15 @@
 package com.logme.punctuation;
 
 /**
- * Todo: actualize
- *
- * Describes indentation style for a multiline group of items.
+ * Describes punctuation rule for a multiline group of items.
  * <p>
- * Each item is separated by comma and is placed on a separate line with the specified indent.
+ * Each item is separated by comma and is placed on a separate 
+ * line with the specified indent.
  * <p>
- * Indent level must be provided via constructor. The result indent is calculated as indent level multiplied by
- * a number of indent characters for single level. By default single level indent corresponds to 4 spaces.
+ * Indent level must be provided via constructor. The result indent 
+ * is calculated as indent level multiplied by a number of indent 
+ * characters for single level. By default single level indent 
+ * corresponds to 4 spaces.
  * <p>
  * Example:
  * <pre>{@code Starts with opening bracket -> {
@@ -19,6 +20,9 @@ package com.logme.punctuation;
  * </pre>
  */
 public class MultilineGroupPunctuation implements GroupPunctuation {
+
+    private static final int TAB_SIZE = 4;
+    private static final String TAB_CHAR = PunctuationMark.SPACE.value();
 
     private final GroupPunctuation groupPunctuation;
 
@@ -31,12 +35,27 @@ public class MultilineGroupPunctuation implements GroupPunctuation {
         this.indentLevel = indentLevel;
         this.groupPunctuation = groupPunctuation;
 
-        String indent = Indents.forLevel(indentLevel);
+        String indent = buildIndent(indentLevel);
         this.openingMark = groupPunctuation.getOpeningMark() + System.lineSeparator() + indent;
         this.indent = System.lineSeparator() + indent;
 
-        String reducedIndent = Indents.forLevel(indentLevel - 1);
+        String reducedIndent = buildIndent(indentLevel - 1);
         this.closingMark = System.lineSeparator() + reducedIndent + groupPunctuation.getClosingMark();
+    }
+
+    private static String buildIndent(int level) {
+        if (level <= 0) {
+            return "";
+        }
+
+        StringBuilder indentBuilder = new StringBuilder();
+        int count = level * TAB_SIZE;
+        while (count > 0) {
+            indentBuilder.append(TAB_CHAR);
+            count--;
+        }
+
+        return indentBuilder.toString();
     }
 
     @Override

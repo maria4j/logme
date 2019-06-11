@@ -3,7 +3,7 @@ package com.logme;
 /**
  * An entry point of Logme.
  * <p>
- * Start to create Logme messages by using {@code message}-methods.
+ * Start creating Logme messages by using {@code message}-methods.
  */
 public final class Logme {
 

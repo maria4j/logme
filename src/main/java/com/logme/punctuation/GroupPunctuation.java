@@ -1,7 +1,10 @@
 package com.logme.punctuation;
 
 /**
- * Describes punctuation rules for a group of items to convey text structure.
+ * Describes punctuation rule for a group of items to convey text structure.
+ * <p>
+ * design notes: delimiter and indent are separated because it allows to
+ * create one multiline wrapper instead of many for each group punctuation.
  *
  * @see SquareGroupPunctuation
  * @see CurlyGroupPunctuation

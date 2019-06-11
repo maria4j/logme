@@ -1,7 +1,7 @@
 package com.logme.punctuation;
 
 /**
- * Describes indentation style for a single-line group of items enclosed in square brackets.
+ * Describes punctuation rule for a single-line group of items enclosed in square brackets.
  * <p>
  * Example: {@code [a, b, c]}
  */
