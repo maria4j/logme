@@ -1,6 +1,6 @@
 package com.logme;
 
-import com.logme.punctuation.*;
+import com.logme.punctuation.MultilineGroupPunctuation;
 
 import java.util.ArrayList;
 import java.util.Collection;

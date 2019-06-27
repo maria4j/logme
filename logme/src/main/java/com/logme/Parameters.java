@@ -1,6 +1,9 @@
 package com.logme;
 
-import com.logme.punctuation.*;
+import com.logme.punctuation.CurlyGroupPunctuation;
+import com.logme.punctuation.GroupPunctuation;
+import com.logme.punctuation.PunctuationMark;
+import com.logme.punctuation.SquareGroupPunctuation;
 
 import java.util.ArrayList;
 import java.util.Collection;
