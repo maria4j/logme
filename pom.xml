@@ -11,7 +11,7 @@
     
     <modules>
         <module>logme</module>
-        <module>logme-test</module>
+        <module>logme-test-mockito-1.10.19</module>
     </modules>
 
     <properties>
