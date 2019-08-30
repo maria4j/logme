@@ -24,8 +24,8 @@ An example of the message built with Logme:
 **_Note:_** The current version of Logme doesn't support the configuration of the message format.
 
 ## Requirements
-1. Java: any 8 version or grater.
-2. Maven: any 3 version or grater.
+1. Java: any 8 version or greater.
+2. Maven: any 3 version or greater.
 
 ## Using with Maven
 Add the dependency to your `pom.xml` file:
