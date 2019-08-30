@@ -16,6 +16,11 @@ Logme takes care of how your logs look like so you may focus on what they try to
 * Automatic indentaion
 * Multilining 
 
+An example of the message built with Logme:
+```text
+[FORECASTER-THREAD-1] Requesting weather forecast {date=01.08.2019 17:45 GMT+7, location=Novosibirsk}
+```
+
 **_Note:_** The current version of Logme doesn't support the configuration of the message format.
 
 ## Requirements
@@ -114,7 +119,7 @@ Message message = Logme.message("System configuration: ")
                        );
 ```
 
-Logme takes care about the text format and automatically build the message with the proper indentation.
+Logme takes care of text formatting and automatically builds the message with the proper indentation.
 
 The output of the `System.out.println(message)` will be the following:
 ```text
@@ -122,7 +127,7 @@ System configuration: {
     enabled=true, 
     server.max-connections=200,
     server.queue-size=50,
-    node.id="brown-bear"
+    node.id=brown-bear
 }
 ```
 Supported parameter types:
@@ -134,7 +139,7 @@ Supported parameter types:
 * `MultilineParameters`
 
 If you need to multiline individual parameter value represented by array or collection call 
-`append`, `appendParameters`, `appendMultilineParameters` on the message as follows:
+`append`, `appendParameters`, `appendMultilineParameters` on the message with ```multilineValue``` parameter set to ```true```:
 ```java
 String[] stickedRegions = getStickedRegions(); 
 Message message = Logme.message("System configuration: ")
@@ -153,7 +158,7 @@ System configuration: {
     enabled=true, 
     server.max-connections=200,
     server.queue-size=50,
-    node.id="brown-bear",
+    node.id=brown-bear,
     node.sticked-regions=[
         "West Siberia",
         "Far East"
@@ -178,3 +183,7 @@ The output of the `System.out.println(message)` will be the following:
 ```text
 [FORECASTER-THREAD-1] Requesting weather forecast {date=01.08.2019 17:45 GMT+7, location=Novosibirsk}
 ```
+
+## LICENSE
+
+[MIT](LICENSE)
