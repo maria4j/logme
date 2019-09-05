@@ -184,6 +184,6 @@ The output of the `System.out.println(message)` will be the following:
 [FORECASTER-THREAD-1] Requesting weather forecast {date=01.08.2019 17:45 GMT+7, location=Novosibirsk}
 ```
 
-## LICENSE
+## License
 
 [MIT](LICENSE)
