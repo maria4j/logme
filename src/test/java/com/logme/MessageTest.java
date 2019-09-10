@@ -128,19 +128,7 @@ class MessageTest {
                 actual
         );
     }
-
-    // todo: move to readme
-    /*
-     * message : text payload appendedMessages
-     * appendedMessages: message | message ' ' appendedMessages
-     * payload : '{' parameters '}'
-     * parameters : name '=' value | name '=' value ', ' parameters
-     * value : simpleValue | '[' arrayValue ']'
-     * arrayValue : simpleValueArray | payloadArray
-     * simpleValueArray : simpleValue | simpleValue ', ' simpleValueArray
-     * payloadArray : payload | payload ', ' payloadArray
-     * payload, name, simpleValue: java.lang.String
-     */
+    
     @Test
     void append_textAndParametersAndText_appended() {
         // Given
