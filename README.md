@@ -33,9 +33,9 @@ Add the dependency to your `pom.xml` file:
 ```xml
 <dependencies>
   <dependency>
-    <groupId>com.logme</groupId>
+    <groupId>com.github.maria4j</groupId>
     <artifactId>logme</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </dependency>
 </dependencies>
 ```
