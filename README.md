@@ -4,12 +4,12 @@
 Logme is a Java library for building structured and readable logs 
 created to make developers and support engineers happier :grinning:
 
-Logs reading is accompanied by a strong desire to understand what is happening in the system. 
+Log reading is accompanied by a strong desire to understand what is happening in the system. 
 Comprehensible log messages usually obey the unified format stated in your Code Style Guide. 
 Checking that logs correspond to the accepted rules requires a lot of attention during the code review 
 and often makes both the reviewer and the developer sad. 
-Logs described by a monosemantic grammar allow to avoid these excessive efforts and can be parsed and analyzed automatically.
-Logme takes care of how your logs look like so you may focus on what they try to tell. 
+Logs described by monosemantic grammar allow us to avoid these excessive efforts and can be parsed and analyzed automatically.
+Logme takes care of how your logs look like so you may focus on what they should tell. 
 
 ## Features
 * Unified logs format
