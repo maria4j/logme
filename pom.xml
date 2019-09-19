@@ -4,7 +4,7 @@
 
     <groupId>com.github.maria4j</groupId>
     <artifactId>logme</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>Logme</name>
     <description>Build simple log messages for people and machines</description>
@@ -27,7 +27,7 @@
         <connection>scm:git:git://github.com/maria4j/logme.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:maria4j/logme.git</developerConnection>
         <url>https://github.com/maria4j/logme</url>
-        <tag>HEAD</tag>
+        <tag>v1.0.0</tag>
     </scm>
 
     <distributionManagement>
